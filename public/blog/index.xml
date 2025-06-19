@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Blogs on jugaad</title>
+    <link>https://singhster-05.github.io/jugaad/blog/</link>
+    <description>Recent content in Blogs on jugaad</description>
+    <generator>Hugo -- 0.147.8</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Jun 2025 15:26:31 -0400</lastBuildDate>
+    <atom:link href="https://singhster-05.github.io/jugaad/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My non-existing CS Education</title>
+      <link>https://singhster-05.github.io/jugaad/blog/cs-education/</link>
+      <pubDate>Thu, 19 Jun 2025 15:26:31 -0400</pubDate>
+      <guid>https://singhster-05.github.io/jugaad/blog/cs-education/</guid>
+      <description>&lt;p&gt;Over the course of my career I have self-taught myself a number of topics.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Scripting (R, SQL, Python, etc.)&lt;/li&gt;
+&lt;li&gt;Machine Learning (Linear Regression, Logistic Regression, etc.)&lt;/li&gt;
+&lt;li&gt;Data Science (Data Wrangling, Data Analysis, etc.)&lt;/li&gt;
+&lt;li&gt;AI (Deep Learning, etc.)&lt;/li&gt;
+&lt;li&gt;Virtualization (Docker, etc.)&lt;/li&gt;
+&lt;li&gt;Basic Linux &amp;amp; Shell commands&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But I never received a formal education in Computer Science. And has always bugged me when I would see friends and colleagues with a CS education just grasp concepts which took me a couple of minutes to understand.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
