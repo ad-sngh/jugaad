@@ -24,7 +24,7 @@ And remember even though the hype cycle is currently stuck at LLMs and Agents, t
 Before diving into the timeline, it's important to understand the different levels of data analysis you'll progress through. Each level builds upon the previous one, increasing in both value and complexity.
 
 {{< rawhtml >}}
-<iframe src="/jugaad/learning-visual-fixed.html" style="width: 100%; height: 500px; border: none; background: transparent;" frameborder="0" scrolling="no"></iframe>
+<iframe src="../learning-visual-fixed.html" style="width: 100%; height: 500px; border: none; background: transparent;" frameborder="0" scrolling="no"></iframe>
 {{< /rawhtml >}}
 
 *Click on any layer of the pyramid above to explore what each level of analysis entails. This pyramid represents your journey from basic data summarization to advanced causal inference. The exact path we'll follow in this learning program.*
@@ -42,7 +42,7 @@ Before diving into the timeline, it's important to understand the different leve
 
 {{< rawhtml >}}
 <div class="timeline-container">
-  <div class="timeline-phase" onclick="window.location.href='/jugaad/learning-path/phase-1-data-analyst/'" style="cursor: pointer;">
+  <div class="timeline-phase" onclick="window.location.href='./phase-1-data-analyst/'" style="cursor: pointer;">
     <div class="timeline-node"></div>
     <div class="timeline-content">
       <div class="phase-status"></div>
@@ -58,7 +58,7 @@ Before diving into the timeline, it's important to understand the different leve
     </div>
   </div>
   
-  <div class="timeline-phase" onclick="window.location.href='/jugaad/learning-path/phase-2-data-scientist/'" style="cursor: pointer;">
+  <div class="timeline-phase" onclick="window.location.href='./phase-2-data-scientist/'" style="cursor: pointer;">
     <div class="timeline-node"></div>
     <div class="timeline-content">
       <div class="phase-status"></div>
@@ -74,7 +74,7 @@ Before diving into the timeline, it's important to understand the different leve
     </div>
   </div>
   
-  <div class="timeline-phase" onclick="window.location.href='/jugaad/learning-path/phase-3-ml-engineer/'" style="cursor: pointer;">
+  <div class="timeline-phase" onclick="window.location.href='./phase-3-ml-engineer/'" style="cursor: pointer;">
     <div class="timeline-node"></div>
     <div class="timeline-content">
       <div class="phase-status"></div>
@@ -90,7 +90,7 @@ Before diving into the timeline, it's important to understand the different leve
     </div>
   </div>
   
-  <div class="timeline-phase" onclick="window.location.href='/jugaad/learning-path/phase-4-llm-agents/'" style="cursor: pointer;">
+  <div class="timeline-phase" onclick="window.location.href='./phase-4-llm-agents/'" style="cursor: pointer;">
     <div class="timeline-node"></div>
     <div class="timeline-content">
       <div class="phase-status"></div>
