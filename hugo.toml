@@ -14,8 +14,8 @@ theme = 'hextra'
     displayLogo = true
 
     [params.navbar.logo]
-      path = "/favicon.png"
-      dark = "/favicon.png"
+      path = "/jugaad/favicon.png"
+      dark = "/jugaad/favicon.png"
       width = 32
       height = 32
   
