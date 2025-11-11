@@ -1,4 +1,4 @@
-baseURL = 'http://localhost:1313/'
+baseURL = 'https://ad-sngh.github.io/jugaad/'
 languageCode = 'en-us'
 title = 'jugaad'
 theme = 'hextra'
