@@ -1,25 +1,72 @@
-baseURL = 'https://ad-sngh.github.io/jugaad/'
+baseURL = 'http://localhost:1313/'
 languageCode = 'en-us'
 title = 'jugaad'
-theme = 'PaperMod'
+theme = 'hextra'
 
 [params]
-defaultTheme = 'auto'
-ShowReadingTime = true
-ShowShareButtons = true
-ShowPostNavLinks = true
-ShowBreadCrumbs = true
-ShowCodeCopyButtons = true
+  # Hextra specific parameters
+  description = "AI, MLE & Software"
+  displayUpdatedDate = true
+  dateFormat = "2006-01-02"
 
-[params.profileMode]
-enabled = true
-title = "Aditya Singh"
-subtitle = "AI, MLE & Software"
+  [params.navbar]
+    displayTitle = true
+    displayLogo = true
+
+    [params.navbar.logo]
+      path = "/favicon.png"
+      dark = "/favicon.png"
+      width = 32
+      height = 32
+  
+  # Theme toggle
+  themeToggle = true
+  
+  # Code copy
+  codeCopyButton = true
+  
+  # Reading time
+  readingTime = true
+  
+  # Breadcrumb
+  breadcrumb = true
+  
+  # Edit page
+  editPage = true
+  editPageURL = "https://github.com/ad-sngh/jugaad/edit/main/content/"
+
+[params.assets]
+favicon = "/favicon.png"
+favicon16x16 = "/favicon-16x16.png"
+favicon32x32 = "/favicon-32x32.png"
+apple_touch_icon = "/apple-touch-icon.png"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "github-dark"
+    lineNos = true
+
+# Search configuration for Hextra
+[outputs]
+home = ["HTML", "RSS", "JSON"]
 
 [menu]
-main = [
-    { identifier = 'home', name = 'Home', url = '/', weight = 10 },
-    { identifier = 'about', name = 'About', url = '/about/', weight = 20 },
-    { identifier = 'blog', name = 'Blog', url = '/blog/', weight = 30 },
-    { identifier = 'projects', name = 'Projects', url = '/projects/', weight = 40 }
-]
+  [[menu.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+  [[menu.main]]
+    name = 'About'
+    pageRef = '/about'
+    weight = 20
+  [[menu.main]]
+    name = 'Blog'
+    pageRef = '/blog'
+    weight = 30
+  [[menu.main]]
+    name = 'Learning Path'
+    pageRef = '/learning-path'
+    weight = 40

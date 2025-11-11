@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramid of Data Insight</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: transparent;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+            min-height: 350px;
+        }
+        
+        .pyramid-wrapper {
+            flex: 0 0 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .pyramid-layer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: -1px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            border-left: 2px solid rgba(0,0,0,0.1);
+            border-right: 2px solid rgba(0,0,0,0.1);
+        }
+        
+        .pyramid-layer:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
+        
+        .layer-text {
+            padding: 10px 15px;
+            font-size: 13px;
+            line-height: 1.1;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+        
+        .layer-subtext {
+            font-size: 10px;
+            opacity: 0.9;
+            margin-top: 3px;
+        }
+        
+        /* Pyramid shapes using CSS transforms - scaled up for better text fit */
+        .layer-5 {
+            width: 180px;
+            height: 60px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+        }
+        
+        .layer-4 {
+            width: 250px;
+            height: 60px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+        }
+        
+        .layer-3 {
+            width: 320px;
+            height: 60px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+        }
+        
+        .layer-2 {
+            width: 370px;
+            height: 60px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            clip-path: polygon(2% 0%, 98% 0%, 100% 100%, 0% 100%);
+        }
+        
+        .layer-1 {
+            width: 390px;
+            height: 60px;
+            background: linear-gradient(135deg, #1f2937, #111827);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .details-panel {
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .info-card {
+            min-height: 200px;
+            transition: all 0.5s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .info-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        .title {
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .description {
+            font-size: 13px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto">
+        <h1 class="text-2xl font-extrabold text-gray-800 mb-3 text-center">
+            The Pyramid of Data Insight
+        </h1>
+        <p class="text-gray-600 mb-6 text-center text-sm">
+            Click any layer to see what you'll learn at each level
+        </p>
+
+        <div class="main-container">
+            <!-- Pyramid -->
+            <div class="pyramid-wrapper">
+                <div class="layer-5 pyramid-layer" data-id="causal">
+                    <div class="layer-text">
+                        CAUSAL &<br>MECHANISTIC
+                        <div class="layer-subtext">Highest Value | Max Difficulty</div>
+                    </div>
+                </div>
+
+                <div class="layer-4 pyramid-layer" data-id="predictive">
+                    <div class="layer-text">
+                        PREDICTIVE
+                        <div class="layer-subtext">High Value | High Difficulty</div>
+                    </div>
+                </div>
+
+                <div class="layer-3 pyramid-layer" data-id="inferential">
+                    <div class="layer-text">
+                        INFERENTIAL &<br>EXPLORATORY
+                        <div class="layer-subtext">Medium Value | Medium Difficulty</div>
+                    </div>
+                </div>
+                
+                <div class="layer-2 pyramid-layer" data-id="descriptive">
+                    <div class="layer-text">
+                        DESCRIPTIVE
+                        <div class="layer-subtext">Foundational | Low Difficulty</div>
+                    </div>
+                </div>
+
+                <div class="layer-1 pyramid-layer" data-id="foundation">
+                    <div class="layer-text">
+                        SUMMARIZED DATA<br>(Foundation)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Details Panel -->
+            <div class="details-panel">
+                <div id="info-card" class="info-card p-6 bg-white rounded-lg shadow border-l-4 border-blue-500">
+                    <p class="text-gray-500 mb-3 italic text-sm">Select a layer to view details.</p>
+                    <h2 id="card-title" class="title font-bold text-gray-800 mb-3"></h2>
+                    <p id="card-question" class="subtitle font-semibold text-blue-600 mb-3"></p>
+                    <p id="card-desc" class="description text-gray-700"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const layers = [
+            {
+                id: 'causal',
+                title: 'CAUSAL & MECHANISTIC',
+                question: 'WHY did this happen? (Effect / Mechanism)',
+                desc: 'Determining the deterministic mechanism or average effect of interventions. This informs prescriptive actions and strategic decisions. The gold standard for AI guidance.',
+                color: 'border-red-500'
+            },
+            {
+                id: 'predictive',
+                title: 'PREDICTIVE',
+                question: 'WHAT will happen to this individual?',
+                desc: 'Forecasting future outcomes for individual entities (customer churn, lifetime value, next best action). This fuels automated decision-making and ML models.',
+                color: 'border-orange-500'
+            },
+            {
+                id: 'inferential',
+                title: 'INFERENTIAL & EXPLORATORY',
+                question: 'DO discoveries generalize to the full population?',
+                desc: 'Drawing conclusions about large populations from smaller samples using statistical tests. Finding patterns and relationships for hypothesis generation.',
+                color: 'border-green-500'
+            },
+            {
+                id: 'descriptive',
+                title: 'DESCRIPTIVE',
+                question: 'WHAT happened? (Summary)',
+                desc: 'Summarizing data characteristics (averages, distributions, counts) without interpretations or predictions. The foundational reporting layer where you\'ll start.',
+                color: 'border-blue-500'
+            },
+            {
+                id: 'foundation',
+                title: 'SUMMARIZED DATA (Foundation)',
+                question: 'Initial: Did you summarize the raw data?',
+                desc: 'This represents the required input for all subsequent analysis. Without this step, you\'re not doing data analysis yet - just data preparation.',
+                color: 'border-gray-500'
+            }
+        ];
+
+        const infoCard = document.getElementById('info-card');
+        const cardTitle = document.getElementById('card-title');
+        const cardQuestion = document.getElementById('card-question');
+        const cardDesc = document.getElementById('card-desc');
+
+        document.querySelectorAll('.pyramid-layer').forEach(layer => {
+            layer.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const data = layers.find(l => l.id === id);
+
+                // Update card content
+                cardTitle.textContent = data.title;
+                cardQuestion.textContent = data.question;
+                cardDesc.textContent = data.desc;
+
+                // Update card border color
+                infoCard.className = infoCard.className.split(' ').filter(c => !c.startsWith('border-')).join(' ');
+                infoCard.classList.add('info-card', 'p-6', 'bg-white', 'rounded-lg', 'shadow', 'border-l-4', data.color);
+
+                // Make card visible
+                infoCard.classList.add('info-visible');
+            });
+        });
+
+        // Set initial state
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialData = layers.find(l => l.id === 'descriptive');
+            cardTitle.textContent = initialData.title;
+            cardQuestion.textContent = initialData.question;
+            cardDesc.textContent = initialData.desc;
+            infoCard.classList.add('border-blue-500', 'info-visible');
+        });
+    </script>
+</body>
+</html>

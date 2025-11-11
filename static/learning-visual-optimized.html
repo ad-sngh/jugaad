@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramid of Data Insight</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: transparent;
+            margin: 0;
+            padding: 0;
+        }
+        .pyramid-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+        }
+        .pyramid-layer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(0% 100%, 100% 100%, 85% 0%, 15% 0%);
+            margin-bottom: -2px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+        .pyramid-layer:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
+        .layer-content {
+            padding: 0.75rem 0;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.2;
+            z-index: 5;
+        }
+
+        /* Specific trapezoid shapes for visual perspective */
+        #layer-5 { width: 40%; }
+        #layer-4 { width: 60%; }
+        #layer-3 { width: 80%; }
+        #layer-2 { width: 95%; }
+        #layer-1 { width: 100%; }
+
+        /* Color classes matching your timeline theme */
+        .bg-level-1 { background: linear-gradient(135deg, #3b82f6, #2563eb); } /* Blue - matches timeline */
+        .bg-level-2 { background: linear-gradient(135deg, #10b981, #059669); } /* Green */
+        .bg-level-3 { background: linear-gradient(135deg, #f59e0b, #d97706); } /* Yellow/Orange */
+        .bg-level-4 { background: linear-gradient(135deg, #ef4444, #dc2626); } /* Red */
+
+        .border-level { border-color: rgba(0,0,0,0.1); }
+
+        /* The 'Not Analysis' box */
+        .not-analysis {
+            background: linear-gradient(135deg, #1f2937, #111827);
+            color: white;
+            border: 2px solid #374151;
+        }
+
+        /* Info card */
+        #info-card {
+            min-height: 140px;
+            transition: all 0.5s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .info-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* Ensure layers stack properly */
+        #layer-1 { z-index: 5; }
+        #layer-2 { z-index: 4; }
+        #layer-3 { z-index: 3; }
+        #layer-4 { z-index: 2; }
+        #layer-5 { z-index: 1; }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .layer-content {
+                padding: 0.5rem 0;
+                font-size: 0.85rem;
+            }
+            #layer-5 { width: 45%; }
+            #layer-4 { width: 65%; }
+            #layer-3 { width: 85%; }
+        }
+    </style>
+</head>
+<body class="p-2">
+
+    <div class="max-w-full mx-auto">
+        <h1 class="text-2xl font-extrabold text-gray-800 mb-3 text-center">
+            The Pyramid of Data Insight
+        </h1>
+        <p class="text-gray-600 mb-4 text-center text-sm">
+            Click any layer to see what you'll learn at each level
+        </p>
+
+        <!-- Main Content Grid -->
+        <div class="flex flex-row gap-6 items-center">
+            
+            <!-- Left Side: Pyramid -->
+            <div class="w-2/5 flex justify-center">
+                <div class="pyramid-container shadow-lg rounded-lg overflow-hidden bg-gray-50 border border-gray-200 p-3">
+
+                    <!-- Level 5: Causal / Mechanistic (Apex) -->
+                    <div id="layer-5" class="pyramid-layer bg-level-4 text-white text-xs shadow-lg border-t-4 border-level" data-id="causal">
+                        <div class="layer-content">
+                            CAUSAL & MECHANISTIC<br><span class="text-gray-200 text-xs">Highest Value | Max Difficulty</span>
+                        </div>
+                    </div>
+
+                    <!-- Level 4: Predictive -->
+                    <div id="layer-4" class="pyramid-layer bg-level-3 text-white text-sm shadow-md border-t-2 border-level" data-id="predictive">
+                        <div class="layer-content">
+                            PREDICTIVE<br><span class="text-gray-200 text-xs">High Value | High Difficulty</span>
+                        </div>
+                    </div>
+
+                    <!-- Level 3: Inferential -->
+                    <div id="layer-3" class="pyramid-layer bg-level-2 text-white text-sm shadow-sm border-t border-level" data-id="inferential">
+                        <div class="layer-content">
+                            INFERENTIAL & EXPLORATORY<br><span class="text-gray-200 text-xs">Medium Value | Medium Difficulty</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Level 2: Descriptive -->
+                    <div id="layer-2" class="pyramid-layer bg-level-1 text-white text-sm border-t border-level" data-id="descriptive">
+                        <div class="layer-content">
+                            DESCRIPTIVE<br><span class="text-gray-200 text-xs">Foundational | Low Difficulty</span>
+                        </div>
+                    </div>
+
+                    <!-- Level 1: Foundation (Not Analysis) -->
+                    <div id="layer-1" class="pyramid-layer not-analysis text-sm rounded-b-lg border-t-4 border-gray-600" data-id="foundation">
+                        <div class="layer-content">
+                            SUMMARIZED DATA (Foundation)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Info Card -->
+            <div class="w-3/5">
+                <div id="info-card" class="p-6 bg-white rounded-lg shadow border-l-4 border-blue-500 flex flex-col justify-center">
+                    <p class="text-gray-500 mb-2 italic text-sm">Select a layer to view details.</p>
+                    <h2 id="card-title" class="text-lg font-bold text-gray-800 mb-2"></h2>
+                    <p id="card-question" class="text-base font-semibold text-blue-600 mb-2"></p>
+                    <p id="card-desc" class="text-gray-700 text-sm"></p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const layers = [
+            {
+                id: 'causal',
+                title: 'CAUSAL & MECHANISTIC',
+                question: 'WHY did this happen? (Effect / Mechanism)',
+                desc: 'Determining the deterministic mechanism or average effect of interventions. This informs prescriptive actions and strategic decisions. **The gold standard for AI guidance.**',
+                color: 'border-red-500'
+            },
+            {
+                id: 'predictive',
+                title: 'PREDICTIVE',
+                question: 'WHAT will happen to this individual?',
+                desc: 'Forecasting future outcomes for individual entities (customer churn, lifetime value, next best action). This fuels automated decision-making and ML models.',
+                color: 'border-orange-500'
+            },
+            {
+                id: 'inferential',
+                title: 'INFERENTIAL & EXPLORATORY',
+                question: 'DO discoveries generalize to the full population?',
+                desc: 'Drawing conclusions about large populations from smaller samples using statistical tests. Finding patterns and relationships for hypothesis generation.',
+                color: 'border-green-500'
+            },
+            {
+                id: 'descriptive',
+                title: 'DESCRIPTIVE',
+                question: 'WHAT happened? (Summary)',
+                desc: 'Summarizing data characteristics (averages, distributions, counts) without interpretations or predictions. The foundational reporting layer where you\'ll start.',
+                color: 'border-blue-500'
+            },
+            {
+                id: 'foundation',
+                title: 'SUMMARIZED DATA (Foundation)',
+                question: 'Initial: Did you summarize the raw data?',
+                desc: 'This represents the required input for all subsequent analysis. Without this step, you\'re not doing data analysis yet - just data preparation.',
+                color: 'border-gray-500'
+            }
+        ];
+
+        const infoCard = document.getElementById('info-card');
+        const cardTitle = document.getElementById('card-title');
+        const cardQuestion = document.getElementById('card-question');
+        const cardDesc = document.getElementById('card-desc');
+
+        document.querySelectorAll('.pyramid-layer').forEach(layer => {
+            layer.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const data = layers.find(l => l.id === id);
+
+                // Update card content
+                cardTitle.textContent = data.title;
+                cardQuestion.textContent = data.question;
+                cardDesc.textContent = data.desc;
+
+                // Update card border color
+                infoCard.className = infoCard.className.split(' ').filter(c => !c.startsWith('border-')).join(' ');
+                infoCard.classList.add(data.color);
+
+                // Make card visible
+                infoCard.classList.add('info-visible');
+            });
+        });
+
+        // Set initial state
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialData = layers.find(l => l.id === 'descriptive');
+            cardTitle.textContent = initialData.title;
+            cardQuestion.textContent = initialData.question;
+            cardDesc.textContent = initialData.desc;
+            infoCard.classList.add('border-blue-500', 'info-visible');
+        });
+    </script>
+</body>
+</html>
