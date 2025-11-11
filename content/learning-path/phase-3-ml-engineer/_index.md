@@ -11,7 +11,7 @@ Welcome to the engineering phase! So far you have built ML models,now let's lear
 
 {{< rawhtml >}}
 <div style="width: 100%; max-width: 800px; margin: 2rem auto; text-align: center;">
-  <img src="/ML-Ops Lifecycle.png" alt="ML-Ops Lifecycle" style="width: 100%; height: auto; max-height: 600px; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+  <img src="/jugaad/ML-Ops Lifecycle.png" alt="ML-Ops Lifecycle" style="width: 100%; height: auto; max-height: 600px; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
 </div>
 {{< /rawhtml >}}
 

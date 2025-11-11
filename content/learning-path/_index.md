@@ -24,7 +24,7 @@ And remember even though the hype cycle is currently stuck at LLMs and Agents, t
 Before diving into the timeline, it's important to understand the different levels of data analysis you'll progress through. Each level builds upon the previous one, increasing in both value and complexity.
 
 {{< rawhtml >}}
-<iframe src="/learning-visual-fixed.html" style="width: 100%; height: 500px; border: none; background: transparent;" frameborder="0" scrolling="no"></iframe>
+<iframe src="/jugaad/learning-visual-fixed.html" style="width: 100%; height: 500px; border: none; background: transparent;" frameborder="0" scrolling="no"></iframe>
 {{< /rawhtml >}}
 
 *Click on any layer of the pyramid above to explore what each level of analysis entails. This pyramid represents your journey from basic data summarization to advanced causal inference. The exact path we'll follow in this learning program.*

@@ -13,7 +13,7 @@ Over the next 90 days, you'll transition from analyzing what happened to predict
 
 {{< rawhtml >}}
 <div style="width: 100%; max-width: 800px; margin: 2rem auto; text-align: center;">
-  <img src="/DS Lifecycle.png" alt="Data Science Lifecycle" style="width: 100%; height: auto; max-height: 600px; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+  <img src="/jugaad/DS Lifecycle.png" alt="Data Science Lifecycle" style="width: 100%; height: auto; max-height: 600px; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
 </div>
 {{< /rawhtml >}}
 
