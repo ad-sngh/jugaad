@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>jugaad – Phase 2: Data Scientist Transition</title>
-    <link>http://localhost:51824/jugaad/learning-path/phase-2-data-scientist/</link>
+    <link>http://localhost:1313/learning-path/phase-2-data-scientist/</link>
     <description>Recent content in Phase 2: Data Scientist Transition on jugaad</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 19 Jun 2025 16:00:00 -0400</lastBuildDate>
     
-	  <atom:link href="http://localhost:51824/jugaad/learning-path/phase-2-data-scientist/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/learning-path/phase-2-data-scientist/index.xml" rel="self" type="application/rss+xml" />
     
     
       

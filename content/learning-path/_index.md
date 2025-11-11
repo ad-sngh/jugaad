@@ -42,7 +42,7 @@ Before diving into the timeline, it's important to understand the different leve
 
 {{< rawhtml >}}
 <div class="timeline-container">
-  <div class="timeline-phase" onclick="window.location.href='/learning-path/phase-1-data-analyst/'" style="cursor: pointer;">
+  <div class="timeline-phase" onclick="window.location.href='/jugaad/learning-path/phase-1-data-analyst/'" style="cursor: pointer;">
     <div class="timeline-node"></div>
     <div class="timeline-content">
       <div class="phase-status"></div>
@@ -58,7 +58,7 @@ Before diving into the timeline, it's important to understand the different leve
     </div>
   </div>
   
-  <div class="timeline-phase" onclick="window.location.href='/learning-path/phase-2-data-scientist/'" style="cursor: pointer;">
+  <div class="timeline-phase" onclick="window.location.href='/jugaad/learning-path/phase-2-data-scientist/'" style="cursor: pointer;">
     <div class="timeline-node"></div>
     <div class="timeline-content">
       <div class="phase-status"></div>
@@ -74,7 +74,7 @@ Before diving into the timeline, it's important to understand the different leve
     </div>
   </div>
   
-  <div class="timeline-phase" onclick="window.location.href='/learning-path/phase-3-ml-engineer/'" style="cursor: pointer;">
+  <div class="timeline-phase" onclick="window.location.href='/jugaad/learning-path/phase-3-ml-engineer/'" style="cursor: pointer;">
     <div class="timeline-node"></div>
     <div class="timeline-content">
       <div class="phase-status"></div>
@@ -90,7 +90,7 @@ Before diving into the timeline, it's important to understand the different leve
     </div>
   </div>
   
-  <div class="timeline-phase" onclick="window.location.href='/learning-path/phase-4-llm-agents/'" style="cursor: pointer;">
+  <div class="timeline-phase" onclick="window.location.href='/jugaad/learning-path/phase-4-llm-agents/'" style="cursor: pointer;">
     <div class="timeline-node"></div>
     <div class="timeline-content">
       <div class="phase-status"></div>
