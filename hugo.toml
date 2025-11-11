@@ -59,14 +59,10 @@ home = ["HTML", "RSS", "JSON"]
     pageRef = '/'
     weight = 10
   [[menu.main]]
-    name = 'About'
-    pageRef = '/about'
-    weight = 20
-  [[menu.main]]
     name = 'Blog'
     pageRef = '/blog'
-    weight = 30
+    weight = 20
   [[menu.main]]
     name = 'Learning Path'
     pageRef = '/learning-path'
-    weight = 40
+    weight = 30

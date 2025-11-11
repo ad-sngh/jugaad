@@ -1,182 +1,93 @@
-{{< rawhtml >}}
-<style>
-  .hero-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    position: relative;
-    overflow: hidden;
-    padding: 2rem;
-  }
+# Making ideas work, one jugaad* at a time.
 
-  .hero-background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.1;
-    background-image: 
-      radial-gradient(circle at 20% 50%, #fff 0.5px, transparent 0.5px),
-      radial-gradient(circle at 80% 80%, #fff 0.5px, transparent 0.5px),
-      radial-gradient(circle at 40% 20%, #fff 0.5px, transparent 0.5px);
-    background-size: 200px 200px;
-    animation: drift 20s linear infinite;
-  }
-
-  @keyframes drift {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    max-width: 800px;
-    color: white;
-  }
-
-  .hero-headline {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin: 0 0 1rem 0;
-    line-height: 1.2;
-    letter-spacing: -1px;
-  }
-
-  .hero-subheadline {
-    font-size: 1.3rem;
-    margin: 0 0 2.5rem 0;
-    opacity: 0.95;
-    line-height: 1.6;
-    font-weight: 300;
-  }
-
-  .hero-cta-group {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-  }
-
-  .hero-cta {
-    padding: 0.875rem 2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .hero-cta-primary {
-    background: white;
-    color: #667eea;
-  }
-
-  .hero-cta-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  }
-
-  .hero-cta-secondary {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-  }
-
-  .hero-cta-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-  }
-
-  .scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: bounce 2s infinite;
-    z-index: 10;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(10px); }
-  }
-
-  .scroll-indicator svg {
-    width: 24px;
-    height: 24px;
-    stroke: white;
-    stroke-width: 2;
-    fill: none;
-  }
-
-  @media (max-width: 768px) {
-    .hero-headline {
-      font-size: 2.5rem;
-    }
-    .hero-subheadline {
-      font-size: 1.1rem;
-    }
-    .hero-cta-group {
-      flex-direction: column;
-    }
-    .hero-cta {
-      width: 100%;
-    }
-  }
-</style>
-
-<div class="hero-section">
-  <div class="hero-background"></div>
-  <div class="hero-content">
-    <h1 class="hero-headline">Making ideas work, one jugaad at a time.</h1>
-    <p class="hero-subheadline">I turn messy problems into working AI solutions. Exploring, tinkering, iterating—my way of making technology practical.</p>
-    <div class="hero-cta-group">
-      <a href="#work" class="hero-cta hero-cta-primary">See My Work</a>
-      <a href="/jugaad/blog/" class="hero-cta hero-cta-secondary">Read the Blog</a>
-    </div>
-  </div>
-  <div class="scroll-indicator">
-    <svg viewBox="0 0 24 24">
-      <path d="M12 5v14M5 12l7 7 7-7"></path>
-    </svg>
-  </div>
-</div>
-{{< /rawhtml >}}
+I turn messy problems into working AI solutions. Exploring, tinkering, iterating—my way of making technology practical.
 
 ---
 
-## 🚀 Featured Work
+## Hi there 👋 I'm Aditya {#about}
 
-Explore my journey across data, AI, and engineering:
+Welcome to my corner of the internet. I'm a data scientist first, who has evolved from data science to ML Engineering to AI. I currently lead the team that builds cloud native AI solutions at Wiser and participate on the AI steering committee committed to making AI more accessible across the organization.
 
-- **[Learning Path](/jugaad/learning-path/)** – A complete roadmap from Data Analyst to ML Engineer to AI Agent Developer
-- **[Blog](/jugaad/blog/)** – Deep dives into AI, machine learning, and software engineering
-- **[Projects](#)** – Real-world solutions built with practical approaches
+I see myself as a leader at the intersection of AI/ML and software development. In previous lives, I've built pricing and promotions solutions at Loblaw Companies Ltd. and data solutions for industry leaders like Target and Kinaxis.
 
----
-
-## 💡 What I Do
-
-**Data & AI Engineering** – Building systems that learn, adapt, and scale
-
-**ML Engineering** – From notebooks to production-grade models
-
-**Software Architecture** – Clean code, smart design, practical solutions
+I've spent the last decade building ML platforms and leading engineering teams across healthcare and retail. The work spans everything from systems that crunch through millions of records daily to shaping enterprise AI strategies that actually move the needle on business outcomes.
 
 ---
 
-## 📚 Latest Insights
+## What Gets Me Excited
 
-Check out my [blog](/jugaad/blog/) for the latest posts on AI, machine learning, and engineering practices.
+Building platforms that make it stupidly easy for teams to ship ML products. I've led cross-functional teams through the full lifecycle: model development, training infrastructure, deployment, monitoring, the whole nine yards.
+
+I've learned that the technical stuff is table stakes. What really matters is building teams that work well together. I focus on fostering collaboration across engineering, data science, product, and operations because that's where the magic happens. When different perspectives come together to solve real problems, that's when you get breakthrough results.
+
+The best platforms? They're invisible. Teams experiment, deploy, and iterate without thinking twice about the infrastructure underneath.
+
+---
+
+## What I Do
+
+I lead AI/ML and Analytics engineering teams to build and scale production ML platforms that drive business impact. This means architecting production ML systems on AWS, defining enterprise AI adoption strategies, and building large-scale infrastructure for NLP, vector embeddings, LLMs, and agentic AI systems.
+
+I'm responsible for end-to-end ML platform architecture, MLOps infrastructure, and enterprise AI strategy. Leading cross-functional teams spanning data science, ML engineering, front-end, and QA to deliver scalable solutions.
+
+---
+
+## My Toolkit
+
+**Core Expertise**
+
+ML Platform Architecture, MLOps and Model Deployment, LLM-based Solutions, Vector Embeddings and NLP, Team Leadership, Enterprise AI Strategy, Cost Optimization, Agentic AI Systems
+
+**Machine Learning & Data Engineering**
+
+PyTorch, TensorFlow, Spark, scikit-learn, Deep Learning, Self-Supervised Learning, Computer Vision, NLP, Predictive Modeling, Model Tuning, Data Cleaning, Multivariate Analysis, Data Visualization, NLTK, Speech Recognition
+
+**Full Stack Development**
+
+Python, FastAPI, Node.js, SQL, NoSQL (MongoDB), Docker, Kubernetes, Terraform, Apache Airflow, Git, CI/CD (GitLab/GitHub Actions, CircleCI), API Integrations, Domain-Driven Design, Hexagonal Architecture
+
+**Cloud & Infrastructure**
+
+AWS (EKS, EC2, SageMaker), GCP, Azure, Infrastructure as Code, Cost Optimization
+
+**Product & Leadership**
+
+Agile Delivery, Rapid Prototyping, Team Management, User Journey Mapping, Lean Canvas, Product Roadmaps, Public Speaking, Cross-functional Collaboration
+
+---
+
+## My Interests
+
+Cloud Computing, Machine Learning, AI Based Workflows, Software Development, Food, Manchester United (in no particular order).
+
+---
+
+## Why I Share
+
+This space is where I share my thoughts, experiences, and insights as someone who has witnessed the transformation of the data space from standalone analysis to notebooks to automated solutions to full-fledged AI workflows. As I lead teams and cultures to adopt modern solutions, I share my experiences, challenges, learnings, and insights here.
+
+I'm not a developer by trade, but I've always been fascinated by the power of software and how it can transform the way we live and work. I believe AI and Machine Learning are the future of software development. I also believe the best way to learn is by doing, and this corner of the internet is a collection of my mistakes and learnings on this journey.
+
+---
+
+## Featured Resources
+
+- **[Learning Path](/learning-path/)** – A complete roadmap from Data Analyst to ML Engineer to AI Agent Developer
+- **[Blog](/blog/)** – Deep dives into AI, machine learning, and software engineering
+
+---
+
+## Let's Connect
+
+I'm always interested in talking about ML platforms, building great teams, and solving hard problems.
+
+**[LinkedIn](https://www.linkedin.com/in/-aditya-singh/)** | **[GitHub](https://github.com/ad-sngh)**
+
+---
+
+## About the Name
+
+**Jugaad** (जुगाड़) is a Hindi slang term that means a clever, unconventional solution to a problem using limited resources. It's about making things work with what you have, embracing imperfection, and iterating quickly. It's the spirit of tinkering, experimenting, and solving real problems in practical ways. That's exactly what I do—turn complex challenges into working solutions, one jugaad at a time.
 
 ---
 

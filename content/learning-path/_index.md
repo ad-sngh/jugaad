@@ -5,7 +5,7 @@ draft = false
 weight = 40
 +++
 
-# Data Analyst → Data Scientist → ML Engineer: A Complete Learning Path
+# A Guided Learning Path
 
 Welcome to a learning path that follows my career journey. I have been asked by data scientists, analysts or engineers to share learning resources over the years. And instead of rumbling through my bookmarks and notion notes, I decided to vibe code this UI and make it available online. All the primary resources listed here will be free and open source (Support the authors, if you can). 
 
@@ -112,22 +112,27 @@ Before diving into the timeline, it's important to understand the different leve
 
 ## 🎓 Success Tips From My Journey
 
-### Learning Strategies That Worked
-- **Consistent daily practice** > Weekend cram sessions
-- **Build immediately** after learning concepts
-- **Join communities** for accountability and support
-- **Document everything** - your future self will thank you
+### Learning Strategies That Actually Work
 
-### Common Pitfalls to Avoid
-- Don't get stuck in "tutorial hell" - build projects early
-- Don't ignore software engineering fundamentals
-- Don't chase every new framework - master the basics first
-- Don't work in isolation - get feedback from peers
+Consistency beats intensity. Show up every day, even if it's just 30 minutes. Weekend cram sessions feel productive but they don't stick. The real magic happens when you build something immediately after learning a concept. Don't just watch tutorials and take notes. Write code, break things, fix them.
 
-### Career Transition Tips
-- **Data Analyst → Data Scientist**: Focus on statistical thinking and basic ML
-- **Data Scientist → ML Engineer**: Emphasize production code and deployment skills
-- **Always be learning**: The field evolves rapidly - stay curious
+Find your people. Join communities, attend meetups, share what you're building. The accountability and feedback from peers accelerates your learning in ways solo study can't match. And document everything as you go. Your future self will be grateful when you need to remember why you made a decision or how something works.
+
+### Common Traps to Watch Out For
+
+Tutorial hell is real. You can watch endless courses and feel like you're learning, but until you build something meaningful, you're not actually progressing. Start building projects early, even if they're small and imperfect.
+
+Don't skip the fundamentals of software engineering. You might get away with sloppy code as a data scientist, but once you're shipping to production, it catches up with you fast. Learn version control, testing, and clean code practices from day one.
+
+Resist the urge to chase every new framework and library. Master the core concepts and pick one tool to get really good with. Once you understand the principles, picking up new tools becomes trivial. And please, don't work in isolation. Get feedback from peers, code review with others, and be open to different perspectives.
+
+### Making the Transitions Stick
+
+Moving from analyst to data scientist means shifting your mindset from "what happened" to "what will happen." Focus on statistical thinking and the fundamentals of machine learning. You don't need to know every algorithm, but you need to understand when and why to use them.
+
+The jump from data scientist to ML engineer is about embracing the engineering side. Start writing production-grade code, learn about deployment, monitoring, and infrastructure. It's not just about model accuracy anymore. It's about systems that work reliably at scale.
+
+And through all of this, stay curious and keep learning. The field moves fast. What's cutting edge today is standard practice tomorrow. That's not something to fear. It's what makes this work exciting.
 
 ---
 
