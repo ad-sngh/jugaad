@@ -81,7 +81,7 @@ I'm not a developer by trade, but I've always been fascinated by the power of so
 
 I'm always interested in talking about ML platforms, building great teams, and solving hard problems.
 
-**[LinkedIn](https://www.linkedin.com/in/-aditya-singh/)** | **[GitHub](https://github.com/ad-sngh)**
+**[LinkedIn](https://www.linkedin.com/in/-aditya-singh/)** | **[GitHub](https://github.com/ad-sngh)** | **[Resume](/jugaad/Aditya_Singh_Resume_Nov2025.pdf)**
 
 ---
 
@@ -91,4 +91,4 @@ I'm always interested in talking about ML platforms, building great teams, and s
 
 ---
 
-*Built with ❤️ using Hugo and Hextra theme*
+*Built using Hugo and Hextra*
