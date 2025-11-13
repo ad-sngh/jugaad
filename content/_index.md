@@ -1,12 +1,12 @@
 # Making ideas work, one jugaad* at a time.
 
-I turn messy problems into working AI solutions. Exploring, tinkering, iterating—my way of making technology practical.
+I turn messy problems into working AI solutions. Exploring, tinkering, and iterating: my way of making technology practical.
 
 ---
 
 ## Hi there 👋 I'm Aditya {#about}
 
-Welcome to my corner of the internet. I'm a data scientist first, who has evolved from data science to ML Engineering to AI. I currently lead the team that builds cloud native AI solutions at Wiser and participate on the AI steering committee committed to making AI more accessible across the organization.
+Welcome to my corner of the internet. I'm a data scientist turned ML engineer and AI leader. I currently lead teams that build cloud native AI solutions at Wiser powering platforms that process millions of records daily across hundreds of customers. I also serve on the AI steering committee committed to making AI more accessible across the organization.
 
 I see myself as a leader at the intersection of AI/ML and software development. In previous lives, I've built pricing and promotions solutions at Loblaw Companies Ltd. and data solutions for industry leaders like Target and Kinaxis.
 
@@ -16,7 +16,7 @@ I've spent the last decade building ML platforms and leading engineering teams a
 
 ## What Gets Me Excited
 
-Building platforms that make it stupidly easy for teams to ship ML products. I've led cross-functional teams through the full lifecycle: model development, training infrastructure, deployment, monitoring, the whole nine yards.
+Building platforms that make it stupidly easy for teams to ship ML products. I've led cross-functional teams through the full lifecycle: model development, training, infrastructure management, deployment, monitoring, the whole nine yards.
 
 I've learned that the technical stuff is table stakes. What really matters is building teams that work well together. I focus on fostering collaboration across engineering, data science, product, and operations because that's where the magic happens. When different perspectives come together to solve real problems, that's when you get breakthrough results.
 
@@ -64,9 +64,9 @@ Cloud Computing, Machine Learning, AI Based Workflows, Software Development, Foo
 
 ## Why I Share
 
-This space is where I share my thoughts, experiences, and insights as someone who has witnessed the transformation of the data space from standalone analysis to notebooks to automated solutions to full-fledged AI workflows. As I lead teams and cultures to adopt modern solutions, I share my experiences, challenges, learnings, and insights here.
+This space is where I share my thoughts, experiences, and insights as someone who has witnessed the transformation of the data space from standalone analysis to notebooks to automated solutions to full-fledged AI workflows. As I lead teams and organizations to adopt modern solutions, I share my experiences, challenges, learnings, and insights here.
 
-I'm not a developer by trade, but I've always been fascinated by the power of software and how it can transform the way we live and work. I believe AI and Machine Learning are the future of software development. I also believe the best way to learn is by doing, and this corner of the internet is a collection of my mistakes and learnings on this journey.
+I'm not a developer by trade, but I've always been fascinated by the power of software and how it can transform the way we live and work. I do believe in the power of AI and Machine Learning to shape the future of software development. I also believe the best way to learn is by doing, and this corner of the internet is a collection of my mistakes and learnings on this journey.
 
 ---
 
@@ -81,7 +81,7 @@ I'm not a developer by trade, but I've always been fascinated by the power of so
 
 I'm always interested in talking about ML platforms, building great teams, and solving hard problems.
 
-**[LinkedIn](https://www.linkedin.com/in/-aditya-singh/)** | **[GitHub](https://github.com/ad-sngh)** | **[Resume](/jugaad/Aditya_Singh_Resume_Nov2025.pdf)**
+**[LinkedIn](https://www.linkedin.com/in/-aditya-singh/)** | **[GitHub](https://github.com/ad-sngh)** | **[Resume](/Aditya_Singh_Resume_Nov2025.pdf)**
 
 ---
 
