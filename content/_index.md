@@ -81,7 +81,7 @@ I'm not a developer by trade, but I've always been fascinated by the power of so
 
 I'm always interested in talking about ML platforms, building great teams, and solving hard problems. Reach out to me on LinkedIn or [Email](mailto:aditya.singh05@hotmail.com).
 
-**[LinkedIn](https://www.linkedin.com/in/-aditya-singh/)** | **[GitHub](https://github.com/ad-sngh)** | **[Resume](/Aditya_Singh_Resume_Nov2025.pdf)**
+**[LinkedIn](https://www.linkedin.com/in/-aditya-singh/)** | **[GitHub](https://github.com/ad-sngh)** | **[Resume](/Aditya_Singh_Resume.pdf)**
 
 ---
 
