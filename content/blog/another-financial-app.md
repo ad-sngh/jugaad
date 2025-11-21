@@ -1,6 +1,6 @@
 +++
 date = '2025-11-21T13:36:00-05:00'
-draft = false
+draft = true
 title = 'Building Another Financial App (Because the World Needs More of Those)'
 +++
 
