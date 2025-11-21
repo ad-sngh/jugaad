@@ -300,3 +300,40 @@ html.dark .timeline-content::before {
     font-size: 1.2rem;
   }
 }
+
+/* Fix code block overflow with TOC sidebar */
+/* Target the main content container */
+.hx-content-container {
+  max-width: 100% !important;
+}
+
+/* Ensure code blocks don't overflow into TOC */
+pre {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  margin-right: 0 !important;
+}
+
+/* Add right margin to main content when TOC is visible */
+@media (min-width: 1280px) {
+  .hx-content {
+    margin-right: 320px !important;
+  }
+  
+  article {
+    max-width: 100% !important;
+  }
+  
+  /* Ensure code blocks stay within content area */
+  pre {
+    max-width: calc(100vw - 600px) !important;
+  }
+}
+
+/* Ensure code blocks respect content width */
+pre code {
+  display: block !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  white-space: pre !important;
+}

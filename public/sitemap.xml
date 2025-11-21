@@ -2,35 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:51017/jugaad/learning-path/</loc>
+    <loc>http://localhost:1313/jugaad/learning-path/</loc>
     <lastmod>2025-06-19T16:00:00-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:51017/jugaad/learning-path/phase-1-data-analyst/</loc>
+    <loc>http://localhost:1313/jugaad/learning-path/phase-1-data-analyst/</loc>
     <lastmod>2025-06-19T16:00:00-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:51017/jugaad/learning-path/phase-2-data-scientist/</loc>
+    <loc>http://localhost:1313/jugaad/learning-path/phase-2-data-scientist/</loc>
     <lastmod>2025-06-19T16:00:00-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:51017/jugaad/learning-path/phase-3-ml-engineer/</loc>
+    <loc>http://localhost:1313/jugaad/learning-path/phase-3-ml-engineer/</loc>
     <lastmod>2025-06-19T16:00:00-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:51017/jugaad/learning-path/phase-4-llm-agents/</loc>
+    <loc>http://localhost:1313/jugaad/learning-path/phase-4-llm-agents/</loc>
     <lastmod>2025-06-19T16:00:00-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:51017/jugaad/</loc>
+    <loc>http://localhost:1313/jugaad/</loc>
+    <lastmod>2025-11-21T13:36:00-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/jugaad/blog/</loc>
+    <lastmod>2025-11-21T13:36:00-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/jugaad/blog/python-env-managers/</loc>
     <lastmod>2025-11-11T17:15:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:51017/jugaad/blog/</loc>
-    <lastmod>2025-11-11T17:15:00-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:51017/jugaad/blog/python-env-managers/</loc>
-    <lastmod>2025-11-11T17:15:00-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:51017/jugaad/blog/cs-education/</loc>
+    <loc>http://localhost:1313/jugaad/blog/cs-education/</loc>
     <lastmod>2025-06-19T15:26:31-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:51017/jugaad/categories/</loc>
+    <loc>http://localhost:1313/jugaad/categories/</loc>
   </url><url>
-    <loc>http://localhost:51017/jugaad/tags/</loc>
+    <loc>http://localhost:1313/jugaad/tags/</loc>
   </url>
 </urlset>
