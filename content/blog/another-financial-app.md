@@ -324,9 +324,23 @@ Building this app taught me more than any tutorial could. The struggles with rat
 
 
 **Next steps:**
-1. **Deploy to production:** Supabase for the database (free tier with 500MB) + Netlify for the frontend (free tier with 100GB bandwidth). Backend will need to be serverless functions or a lightweight container on Railway/Render's free tier. The goal is still zero cost.
+1. **Deployment (Next blog post):** Supabase for the database (free tier with 500MB) + Netlify for the frontend (free tier with 100GB bandwidth). Backend will need to be serverless functions or a lightweight container on Railway/Render's free tier. The goal is still zero cost.
 2. Fix the historical backfill (throttling or synthetic data)
 3. Clean up Tailwind lint warnings
 4. Add tests (Maybe?)
 5. Implement proper caching and throttling for Yahoo Finance API calls
+
+---
+
+## A Note on AI and the Barrier to Entry
+
+This project proved something important: **AI coding tools have dramatically lowered the barrier to entry for building software.** As someone without deep frontend experience, I was able to build a full-stack application with a modern UI in two weekends. That's genuinely remarkable and opens up software development to people who previously would've been stuck in tutorial hell for months.
+
+But here's the critical caveat: **don't trust AI for core business logic or critical functions yet.** A human is still a better judge of correctness, edge cases, and architectural decisions. The AI will confidently generate code that looks right but breaks in subtle ways. It will suggest "fixes" that introduce new bugs. It will delete your database and tell you it was the right call.
+
+Use AI to accelerate learning, generate boilerplate, and iterate on UI. But for the calculations that matter, the security that protects users, and the logic that defines your application—write that yourself or review it extremely carefully. The barrier to entry is lower, but the responsibility to understand what you're shipping hasn't changed.
+
+The best projects are the ones you actually use. This portfolio tracker replaced my Google Sheets mess, and I learned a ton building it. That's a win in my book.
+
+Now go build something that solves your own problem. You'll learn more than you expect. Just don't let the AI convince you to drop your production database.
 
