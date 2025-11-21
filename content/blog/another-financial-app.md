@@ -8,12 +8,16 @@ Look, I know what you're thinking. "Another portfolio tracker? Really?" Yes, rea
 
 **Honest take:** AI coding tools are incredible for iteration speed and getting started as a complete novice. I built a full-stack app with a database, API, and modern frontend in two weekends, something that would've taken me months to learn and build from scratch. But you still need to understand what you're building. I caught several bugs that would have shipped if I wasn't reviewing the code, and the agents struggled badly when left to reconcile changes between frontend and backend without explicit direction. 
 
-At one point, when trying to reconcile changes between my git commit states, it confidently deleted my database, reseeded it with old data and then tried to gaslight me into thinking that it was the right thing to do for the application and the user experience.
-![LLM Debugging Session](/blog/another-financial-app/llm-issues.png)
+At one point, when trying to reconcile changes between my git commit states, it confidently deleted my database, reseeded it with old data and then tried to gaslight me into thinking that it was the right thing to do for the application and the user experience. And then went into a doom loop of writing the same text over and over again.
 
-The agents excel at boilerplate and wireframing but aren't ready for production-grade maintainable code. They confidently suggest changes that break things, confuse business logic, and need constant hand-holding for anything beyond the happy path. With minor guidance, they're incredibly productive. Left to their own devices, they generate slop.
+![LLM Debugging Session](/blog/another-financial-app/llm-issues.png)
+*Windsurf losing its mind when asked to reconcile changes between my git commit states.*
+
+The agents excel at boilerplate and wireframing but aren't ready for production-grade maintainable code. They confidently suggest changes that break things, confuse business logic, and need constant hand-holding for anything beyond the happy path. With minor guidance though, they're incredibly productive. Left to their own devices, they generate slop. 
 
 The real skill isn't prompt engineering it's knowing what context to provide, when to let the AI run, when to step in yourself, and when to just write the damn code because explaining it takes longer. AI is a powerful assistant for learning and prototyping, not a replacement for thinking or understanding your stack.
+
+In order to appear unbiased I changed between 3 agents GPT-Codex 5.1, Windsurf SWE 1.5 & Claude Sonnet 4.5. I did not use Claude Code as it was not available in the open source version of Claude. 
 
 
 ---
@@ -189,7 +193,7 @@ This captures prices at 4:30 PM on weekdays. Simple, effective, and doesn't hamm
 
 ---
 
-## Model Performance: GPT-4, Windsurf & Claude in the Arena
+## Model Performance: GPT-5.1, Windsurf & Claude in the Arena
 
 **GPT-5.1 Codex (via Windsurf Cascade):** Great for planning and architecture discussions. Helped design the database schema and API structure. Sometimes over-engineers solutions, but good at catching edge cases.
 
@@ -317,7 +321,6 @@ Building this app taught me more than any tutorial could. The struggles with rat
 **Would I recommend this approach?** Absolutely. Pick a problem you actually have, build a solution, and learn along the way. You'll retain way more than passively watching courses. Here's my best breakdown of where I spent my time:
 
 ![Agent Time Breakdown](/blog/another-financial-app/gemini-chat-image.png)
-*Holdings table with filters, search, and inline editing.*
 
 
 **Next steps:**
@@ -327,6 +330,3 @@ Building this app taught me more than any tutorial could. The struggles with rat
 4. Add tests (Maybe?)
 5. Implement proper caching and throttling for Yahoo Finance API calls
 
-The best projects are the ones you actually use. This portfolio tracker replaced my Google Sheets mess, and I learned a ton building it. That's a win in my book.
-
-Now go build something that solves your own problem. You'll learn more than you expect.
