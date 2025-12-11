@@ -42,7 +42,7 @@ Honest take: AI coding tools are incredible for iteration speed and getting star
 Honest take: AI coding tools are incredible for iteration speed and getting started as a complete novice. I built a full-stack app with a database, API, and modern frontend in two weekends, something that would’ve taken me months to learn and build from scratch. But you still need to understand what you’re building. I caught several bugs that would have shipped if I wasn’t reviewing the code, and the agents struggled badly when left to reconcile changes between frontend and backend without explicit direction.">
   <meta itemprop="datePublished" content="2025-11-21T13:36:00-05:00">
   <meta itemprop="dateModified" content="2025-11-21T13:36:00-05:00">
-  <meta itemprop="wordCount" content="3338">
+  <meta itemprop="wordCount" content="3596">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Building Another Financial App (Because the World Needs More of Those)">
   <meta name="twitter:description" content="Look, I know what you’re thinking. “Another portfolio tracker? Really?” Yes, really. But this was less about building an application and more about studying the hypothesis that AI coding tools can replace the need for a human engineer.
@@ -173,7 +173,15 @@ Honest take: AI coding tools are incredible for iteration speed and getting star
   >Blogs
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg></span>
     </a><div class="hx:ltr:pr-0 hx:overflow-hidden">
-        <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col open"><a
+        <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col "><a
+    class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
+    href="/jugaad/blog/ai-stock-insights-agent/"
+    
+  >Teaching My Portfolio Tracker to Think (Or At Least Pretend To)
+    </a>
+              
+            </li><li class="hx:flex hx:flex-col open"><a
     class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500"
     href="/jugaad/blog/another-financial-app/"
@@ -213,9 +221,9 @@ Honest take: AI coding tools are incredible for iteration speed and getting star
             </li>
           <li>
               <a
-                href="#model-performance-gpt-4-windsurf--claude-in-the-arena"
+                href="#model-performance-gpt-51-windsurf--claude-in-the-arena"
                 class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
-              >Model Performance: GPT-4, Windsurf &amp; Claude in the Arena</a>
+              >Model Performance: GPT-5.1, Windsurf &amp; Claude in the Arena</a>
             </li>
           <li>
               <a
@@ -234,6 +242,12 @@ Honest take: AI coding tools are incredible for iteration speed and getting star
                 href="#final-thoughts"
                 class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
               >Final Thoughts</a>
+            </li>
+          <li>
+              <a
+                href="#a-note-on-ai-and-the-barrier-to-entry"
+                class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
+              >A Note on AI and the Barrier to Entry</a>
             </li>
           </ul>
   
@@ -333,7 +347,7 @@ Honest take: AI coding tools are incredible for iteration speed and getting star
         </a>
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#model-performance-gpt-4-windsurf--claude-in-the-arena">Model Performance: GPT-4, Windsurf &amp; Claude in the Arena
+        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#model-performance-gpt-51-windsurf--claude-in-the-arena">Model Performance: GPT-5.1, Windsurf &amp; Claude in the Arena
         </a>
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
@@ -350,6 +364,10 @@ Honest take: AI coding tools are incredible for iteration speed and getting star
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
         <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#final-thoughts">Final Thoughts
+        </a>
+      </li>
+      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
+        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#a-note-on-ai-and-the-barrier-to-entry">A Note on AI and the Barrier to Entry
         </a>
       </li></ul>
       <div class="hx:mt-8 hx:border-t hx:bg-white hx:pt-8 hx:shadow-[0_-12px_16px_white] hx:dark:bg-dark hx:dark:shadow-[0_-12px_16px_#111] hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400">
@@ -377,10 +395,12 @@ Honest take: AI coding tools are incredible for iteration speed and getting star
         <div class="content">
           <p>Look, I know what you&rsquo;re thinking. &ldquo;Another portfolio tracker? Really?&rdquo; Yes, really. But this was less about building an application and more about studying the hypothesis that AI coding tools can replace the need for a human engineer.</p>
 <p><strong>Honest take:</strong> AI coding tools are incredible for iteration speed and getting started as a complete novice. I built a full-stack app with a database, API, and modern frontend in two weekends, something that would&rsquo;ve taken me months to learn and build from scratch. But you still need to understand what you&rsquo;re building. I caught several bugs that would have shipped if I wasn&rsquo;t reviewing the code, and the agents struggled badly when left to reconcile changes between frontend and backend without explicit direction.</p>
-<p>At one point, when trying to reconcile changes between my git commit states, it confidently deleted my database, reseeded it with old data and then tried to gaslight me into thinking that it was the right thing to do for the application and the user experience.
-<img src="/jugaad/blog/another-financial-app/llm-issues.png" alt="LLM Debugging Session"  loading="lazy" /></p>
-<p>The agents excel at boilerplate and wireframing but aren&rsquo;t ready for production-grade maintainable code. They confidently suggest changes that break things, confuse business logic, and need constant hand-holding for anything beyond the happy path. With minor guidance, they&rsquo;re incredibly productive. Left to their own devices, they generate slop.</p>
+<p>At one point, when trying to reconcile changes between my git commit states, it confidently deleted my database, reseeded it with old data and then tried to gaslight me into thinking that it was the right thing to do for the application and the user experience. And then went into a doom loop of writing the same text over and over again.</p>
+<p><img src="/jugaad/blog/another-financial-app/llm-issues.png" alt="LLM Debugging Session"  loading="lazy" />
+<em>Windsurf losing its mind when asked to reconcile changes between my git commit states.</em></p>
+<p>The agents excel at boilerplate and wireframing but aren&rsquo;t ready for production-grade maintainable code. They confidently suggest changes that break things, confuse business logic, and need constant hand-holding for anything beyond the happy path. With minor guidance though, they&rsquo;re incredibly productive. Left to their own devices, they generate slop.</p>
 <p>The real skill isn&rsquo;t prompt engineering it&rsquo;s knowing what context to provide, when to let the AI run, when to step in yourself, and when to just write the damn code because explaining it takes longer. AI is a powerful assistant for learning and prototyping, not a replacement for thinking or understanding your stack.</p>
+<p>In order to appear unbiased I changed between 3 agents GPT-Codex 5.1, Windsurf SWE 1.5 &amp; Claude Sonnet 4.5. I did not use Claude Code as it was not available in the open source version of Claude.</p>
 <hr>
 <h2>The Idea: Why?<span class="hx:absolute hx:-mt-20" id="the-idea-why"></span>
     <a href="#the-idea-why" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>My Google Sheets portfolio tracker has become a monster. VLOOKUP formulas, manual price updates, and calculations that are hard to track every time I added a new holding or update any of the current ones. I needed something better, which to be fair could be built in Google sheets, but how will be called an engineer if I dont spend 2 weekends over-complicating my life. Added to that I also had some real life constraints:</p>
@@ -594,8 +614,8 @@ Once the prototype proved the UX, I migrated to React. Not because Alpine couldn
 <em>Holdings table with filters, search, and inline editing.</em></p>
 <p><strong>What&rsquo;s missing:</strong> Historical price backfill gets blocked by Yahoo Finance rate limits. A deployment plan is still needed to get the app live. I have zero-ed in on Supabase + Netlify for the deployment strategy but its still work to be done. As I mentioned earlier, the idea is to keep this at 0 cost.</p>
 <hr>
-<h2>Model Performance: GPT-4, Windsurf &amp; Claude in the Arena<span class="hx:absolute hx:-mt-20" id="model-performance-gpt-4-windsurf--claude-in-the-arena"></span>
-    <a href="#model-performance-gpt-4-windsurf--claude-in-the-arena" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p><strong>GPT-5.1 Codex (via Windsurf Cascade):</strong> Great for planning and architecture discussions. Helped design the database schema and API structure. Sometimes over-engineers solutions, but good at catching edge cases.</p>
+<h2>Model Performance: GPT-5.1, Windsurf &amp; Claude in the Arena<span class="hx:absolute hx:-mt-20" id="model-performance-gpt-51-windsurf--claude-in-the-arena"></span>
+    <a href="#model-performance-gpt-51-windsurf--claude-in-the-arena" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p><strong>GPT-5.1 Codex (via Windsurf Cascade):</strong> Great for planning and architecture discussions. Helped design the database schema and API structure. Sometimes over-engineers solutions, but good at catching edge cases.</p>
 <p><strong>Claude (Sonnet 3.5):</strong> The workhorse for actual coding. Vibecoding the frontend was surprisingly effective. Describe the component, get working React code, iterate on styling. It understood Tailwind patterns and generated clean, consistent code.</p>
 <p><strong>Windsurf - SWE 1.5:</strong> Fast, iterative, and effective. It was able to generate code quickly and efficiently. It was also able to self critique and fix code for when it thought it was wrong.</p>
 <p><strong>Where they struggled:</strong></p>
@@ -705,25 +725,33 @@ AI is great at boilerplate, terrible at nuanced business logic. I wrote the cont
 <h2>Final Thoughts<span class="hx:absolute hx:-mt-20" id="final-thoughts"></span>
     <a href="#final-thoughts" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Building this app taught me more than any tutorial could. The struggles with rate limits, the iterations on UI design, the debugging of calculation mismatches—all of it was valuable learning.</p>
 <p><strong>Would I recommend this approach?</strong> Absolutely. Pick a problem you actually have, build a solution, and learn along the way. You&rsquo;ll retain way more than passively watching courses. Here&rsquo;s my best breakdown of where I spent my time:</p>
-<p><img src="/jugaad/blog/another-financial-app/gemini-chat-image.png" alt="Agent Time Breakdown"  loading="lazy" />
-<em>Holdings table with filters, search, and inline editing.</em></p>
+<p><img src="/jugaad/blog/another-financial-app/gemini-chat-image.png" alt="Agent Time Breakdown"  loading="lazy" /></p>
 <p><strong>Next steps:</strong></p>
 <ol>
-<li><strong>Deploy to production:</strong> Supabase for the database (free tier with 500MB) + Netlify for the frontend (free tier with 100GB bandwidth). Backend will need to be serverless functions or a lightweight container on Railway/Render&rsquo;s free tier. The goal is still zero cost.</li>
+<li><strong>Deployment (Next blog post):</strong> Supabase for the database (free tier with 500MB) + Netlify for the frontend (free tier with 100GB bandwidth). Backend will need to be serverless functions or a lightweight container on Railway/Render&rsquo;s free tier. The goal is still zero cost.</li>
 <li>Fix the historical backfill (throttling or synthetic data)</li>
 <li>Clean up Tailwind lint warnings</li>
 <li>Add tests (Maybe?)</li>
 <li>Implement proper caching and throttling for Yahoo Finance API calls</li>
 </ol>
+<hr>
+<h2>A Note on AI and the Barrier to Entry<span class="hx:absolute hx:-mt-20" id="a-note-on-ai-and-the-barrier-to-entry"></span>
+    <a href="#a-note-on-ai-and-the-barrier-to-entry" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>This project proved something important: <strong>AI coding tools have dramatically lowered the barrier to entry for building software.</strong> As someone without deep frontend experience, I was able to build a full-stack application with a modern UI in two weekends. That&rsquo;s genuinely remarkable and opens up software development to people who previously would&rsquo;ve been stuck in tutorial hell for months.</p>
+<p>But here&rsquo;s the critical caveat: <strong>don&rsquo;t trust AI for core business logic or critical functions yet.</strong> A human is still a better judge of correctness, edge cases, and architectural decisions. The AI will confidently generate code that looks right but breaks in subtle ways. It will suggest &ldquo;fixes&rdquo; that introduce new bugs. It will delete your database and tell you it was the right call.</p>
+<p>Use AI to accelerate learning, generate boilerplate, and iterate on UI. But for the calculations that matter, the security that protects users, and the logic that defines your application—write that yourself or review it extremely carefully. The barrier to entry is lower, but the responsibility to understand what you&rsquo;re shipping hasn&rsquo;t changed.</p>
 <p>The best projects are the ones you actually use. This portfolio tracker replaced my Google Sheets mess, and I learned a ton building it. That&rsquo;s a win in my book.</p>
-<p>Now go build something that solves your own problem. You&rsquo;ll learn more than you expect.</p>
+<p>Now go build something that solves your own problem. You&rsquo;ll learn more than you expect. Just don&rsquo;t let the AI convince you to drop your production database.</p>
 
         </div>
     <div class="hx:mt-12 hx:mb-8 hx:block hx:text-xs hx:text-gray-500 hx:ltr:text-right hx:rtl:text-left hx:dark:text-gray-400">Last updated on <time datetime="2025-11-21T13:36:00.000Z">2025-11-21</time></div><div class="hx:mb-8 hx:flex hx:items-center hx:border-t hx:pt-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-neutral-400 hx:dark:contrast-more:border-neutral-400 hx:print:hidden"><a
         href="/jugaad/blog/python-env-managers/"
         title="Python Environment Managers: pip &#43; venv vs poetry &#43; pyenv vs uv"
         class="hx:flex hx:max-w-[50%] hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:pr-4 hx:rtl:pl-4"
-      ><svg class="hx:inline hx:h-5 hx:shrink-0 hx:ltr:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>Python Environment Managers: pip &#43; venv vs poetry &#43; pyenv vs uv</a></div></main>
+      ><svg class="hx:inline hx:h-5 hx:shrink-0 hx:ltr:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>Python Environment Managers: pip &#43; venv vs poetry &#43; pyenv vs uv</a><a
+        href="/jugaad/blog/ai-stock-insights-agent/"
+        title="Teaching My Portfolio Tracker to Think (Or At Least Pretend To)"
+        class="hx:flex hx:max-w-[50%] hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:ml-auto hx:ltr:pl-4 hx:ltr:text-right hx:rtl:mr-auto hx:rtl:pr-4 hx:rtl:text-left"
+      >Teaching My Portfolio Tracker to Think (Or At Least Pretend To)<svg class="hx:inline hx:h-5 hx:shrink-0 hx:rtl:-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div></main>
     </article>
   </div>
 

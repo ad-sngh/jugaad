@@ -5,7 +5,7 @@
     <description>Recent content on jugaad</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Nov 2025 13:36:00 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 11 Dec 2025 12:00:00 -0500</lastBuildDate>
     
 	  <atom:link href="http://localhost:1313/jugaad/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,6 +13,956 @@
       
       
     
+    
+    <item>
+      <title>Teaching My Portfolio Tracker to Think (Or At Least Pretend To)</title>
+      <link>http://localhost:1313/jugaad/blog/ai-stock-insights-agent/</link>
+      <pubDate>Thu, 11 Dec 2025 12:00:00 -0500</pubDate>
+      
+      <guid>http://localhost:1313/jugaad/blog/ai-stock-insights-agent/</guid>
+      <description>
+        
+        
+        &lt;p&gt;For my portfolio tracker, I decided to double down on the AI chaos by adding &lt;em&gt;actual AI agents&lt;/em&gt; to analyze my stocks. Because if there&amp;rsquo;s one thing more fun than debugging code written by AI, it&amp;rsquo;s debugging AI that&amp;rsquo;s supposed to explain why your stocks are moving. How far can I push the AI circle before it breaks? It&amp;rsquo;s what the top AI companies are doing, so why not me?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The pitch:&lt;/strong&gt; Instead of frantically Googling &amp;ldquo;why is NVDA down 3%&amp;rdquo; every morning, what if the app just&amp;hellip; told me? With evidence? And maybe a &lt;em&gt;hint&lt;/em&gt; of confidence that it&amp;rsquo;s not completely making things up?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The reality:&lt;/strong&gt; I now have a two-agent system running on my laptop that processes my entire portfolio, searches the web for catalysts, and delivers bite-sized insights optimized for my brain-rotted attention span. All for the low, low cost of $0.00 per analysis. The catch?:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It took way more trial and error than I&amp;rsquo;d like to admit&lt;/li&gt;
+&lt;li&gt;It runs off of my laptop, which is not a cloud server&lt;/li&gt;
+&lt;li&gt;Ollama hogs laptop memory effectively crippling my laptop at runtime&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Ollama Cloud is in preview so might make this more bearable. But going back to rule 1: I&amp;rsquo;m not paying for cloud hosting fees to track my own money. Maybe swing for a dedicated mac mini or something from marketplace?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;But look it works!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/jugaad/blog/ai-stock-insights-agent/insights-panel.png&#34; alt=&#34;Stock Insights Panel&#34;  loading=&#34;lazy&#34; /&gt;
+&lt;em&gt;The insights panel in action; short, sweet, and designed for people who don&amp;rsquo;t want to read more than two sentences.&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Idea: Why Add AI Agents?&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;the-idea-why-add-ai-agents&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-idea-why-add-ai-agents&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The portfolio tracker was working fine. It showed prices, gains, losses and all the basics. But I found myself doing the same dance every morning: see a stock move, open a browser, search for news, try to figure out if I should panic or celebrate. Thank you AI &amp;amp; Econometrics!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The problem with manual research:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It interrupts the actual work (or doom-scrolling, let&amp;rsquo;s be honest)&lt;/li&gt;
+&lt;li&gt;News sources bury the lead under paragraphs of SEO fluff&lt;/li&gt;
+&lt;li&gt;By the time you find the catalyst, the market has already moved&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;What I wanted:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Automatic analysis when prices move significantly&lt;/li&gt;
+&lt;li&gt;Clear, concise explanations (not 500-word articles)&lt;/li&gt;
+&lt;li&gt;Evidence-backed catalysts with source attribution&lt;/li&gt;
+&lt;li&gt;All of this running locally because I&amp;rsquo;m still paranoid about costs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Funnily enough while doom scrolling, I found &lt;a href=&#34;https://github.com/IAmTomShaw/stock-tracker-agent&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this excellent stock tracker agent project&lt;/a&gt;. I figured if someone else got it working, how hard could it be?&lt;/p&gt;
+&lt;p&gt;Famous last words.&lt;/p&gt;
+&lt;p&gt;P.S. My Instagram algorithm has learned my interests well. Tip off the hat to their Personalization team.&lt;/p&gt;
+&lt;h2&gt;The Build vs. Buy Dilemma: Why I Rolled My Own&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;the-build-vs-buy-dilemma-why-i-rolled-my-own&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-build-vs-buy-dilemma-why-i-rolled-my-own&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s where things got interesting. The OpenAI Agents SDK looked tempting—rich tool ecosystem, automatic state management, sophisticated error recovery, multi-agent orchestration. It&amp;rsquo;s the kind of developer experience that makes you think &amp;ldquo;I could build something cool with this overnight.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Then you check the pricing.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The math that killed my dreams:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GPT-4 API: $0.03/1K input tokens + $0.06/1K output tokens&lt;/li&gt;
+&lt;li&gt;My portfolio: ~20 holdings&lt;/li&gt;
+&lt;li&gt;Per refresh: 3 agents × 2 calls per holding = $7.20 per cycle&lt;/li&gt;
+&lt;li&gt;Daily operations: &lt;strong&gt;$216/month&lt;/strong&gt; just to know why AAPL moved 2%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For a personal finance app with a &amp;ldquo;zero infrastructure cost&amp;rdquo; mandate, this was a non-starter. I&amp;rsquo;m not paying cloud hosting fees to track my own money, and I&amp;rsquo;m definitely not paying OpenAI to explain my own portfolio movements to me. Not that I understand the reasons for the market moving anyways.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The solution:&lt;/strong&gt; Skip the SDK entirely and build custom plumbing around Ollama&amp;rsquo;s native Python client. No middleware, no compatibility layers just direct API calls to a local model. Easy peasy, right?&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Direct Ollama integration - no SDK abstractions&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#ff7b72&#34;&gt;ollama&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;OLLAMA_CLIENT &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; ollama&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;.&lt;/span&gt;Client(host&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;http://127.0.0.1:11434&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MODEL_NAME &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;gemma3:4b-it-qat&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;_chat_with_ollama&lt;/span&gt;(messages: list, temperature: float &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;0.2&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Send chat completion request directly to Ollama&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    response &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; OLLAMA_CLIENT&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;.&lt;/span&gt;chat(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        model&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt;MODEL_NAME,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        messages&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt;messages,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        options&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt;{&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;temperature&amp;#34;&lt;/span&gt;: temperature}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff7b72&#34;&gt;return&lt;/span&gt; response[&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Is this more work than using an SDK? Yes. Does it give me complete control and zero API costs? Also yes.&lt;/p&gt;
+&lt;h2&gt;The Two-Agent Architecture&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;the-two-agent-architecture&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-two-agent-architecture&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;After much experimentation (and several instances of models hallucinating stock prices and simple math), I settled on a two-agent pipeline:&lt;/p&gt;
+&lt;h3&gt;Agent 1: The Research Agent (Financial Detective)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;agent-1-the-research-agent-financial-detective&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#agent-1-the-research-agent-financial-detective&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;This agent&amp;rsquo;s job is to investigate why a stock moved. It has access to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Price data from yfinance (the actual numbers, not vibes)&lt;/li&gt;
+&lt;li&gt;Web search for news and analysis; Yay DuckDuckGo for being free and a truly open source API client&lt;/li&gt;
+&lt;li&gt;Instructions to find 2+ reputable sources&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RESEARCH_AGENT_PROMPT &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;ROLE: Investigate why a specific equity moved within the past 24 hours
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;WORKFLOW: 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;  1. Call get_stock_price_info for price confirmation
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;  2. Use WebSearchTool for 2+ reputable sources
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;  3. Extract max 3 catalyst drivers
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;  4. Flag uncertainties and data gaps
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;OUTPUT: Structured JSON with thesis, drivers, confidence, sources, risk_notes
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The key insight here: &lt;strong&gt;make the agent confirm prices from the actual API, not from its training data.&lt;/strong&gt; Early versions would confidently report that NVDA was trading at $450 when it was actually at $140. Not ideal for financial analysis.&lt;/p&gt;
+&lt;h3&gt;Agent 2: The Summarizer Agent (The TL;DR Machine)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;agent-2-the-summarizer-agent-the-tldr-machine&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#agent-2-the-summarizer-agent-the-tldr-machine&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In an era where our collective attention span has been reduced to scrolling through 15-second videos, nobody has time for a 500-word market analysis. This agent compresses everything into a punchy, digestible insight which is short enough for even the most brainrot-afflicted among us:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SUMMARIZER_AGENT_PROMPT &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;ROLE: Transform research into a concise insight for attention-deficit investors
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;RULES:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;  1. Start with &amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;{SYMBOL}&lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt; UP|DOWN &lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;{percent}&lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;%: &amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;  2. Highlight strongest driver + action hook
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;  3. Attribute source when space allows
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;  4. Keep it short - if it takes more than 5 seconds to read, you&amp;#39;ve lost them
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The result looks like this:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;🟢 NVDA UP 3.2%: AI chip demand surge exceeds Q4 guidance; 
+   data center orders up 45% via earnings call.
+
+🔴 JPM DOWN 1.8%: Regulatory capital requirements increase; 
+   loan loss provisions rise via WSJ.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Concise. Actionable. And most importantly, I can glance at it while drinking my morning coffee.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Pipeline: From Price Move to Insight&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;the-pipeline-from-price-move-to-insight&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-pipeline-from-price-move-to-insight&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s how it all fits together:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;14
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;15
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;16
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;17
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;18
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;19
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;20
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;21
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;22
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;23
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;run_insights_pipeline&lt;/span&gt;(symbol: str, current_price: float, previous_close: float):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Server-side calculation ensures accuracy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# (Never trust the model to do math)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    move_percent &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; ((current_price &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;-&lt;/span&gt; previous_close) &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;/&lt;/span&gt; previous_close) &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Research phase: web search + price analysis&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    research_result &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; run_research_agent(symbol)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Build comprehensive analysis packet&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    analysis_packet &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;symbol&amp;#34;&lt;/span&gt;: symbol&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;.&lt;/span&gt;upper(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;current_price&amp;#34;&lt;/span&gt;: current_price,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;previous_close&amp;#34;&lt;/span&gt;: previous_close,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;move_percent&amp;#34;&lt;/span&gt;: move_percent,  &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Pre-calculated, not AI-generated&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;research&amp;#34;&lt;/span&gt;: research_result[&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;analysis&amp;#34;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Summarization for dashboard consumption&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    summary_result &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; run_summarizer_agent(analysis_packet)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff7b72&#34;&gt;return&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;analysis&amp;#34;&lt;/span&gt;: research_result[&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;analysis&amp;#34;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;summary&amp;#34;&lt;/span&gt;: summary_result[&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;summary&amp;#34;&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Critical design decision:&lt;/strong&gt; The move percentage is calculated server-side and passed to the agents. Early versions let the model calculate percentages, which resulted in insights like &amp;ldquo;AAPL DOWN 47%&amp;rdquo; when it was actually down 0.47%. Math is not a strong suit of &lt;em&gt;language models&lt;/em&gt;.&lt;/p&gt;
+&lt;h2&gt;API Design: Three Endpoints to Rule Them All&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;api-design-three-endpoints-to-rule-them-all&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#api-design-three-endpoints-to-rule-them-all&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The backend exposes three clean endpoints:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Single Ticker Analysis&lt;/strong&gt; - For on-demand insights&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;@app.post&lt;/span&gt;(&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;/api/insights/run&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;async&lt;/span&gt; &lt;span style=&#34;color:#ff7b72&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;api_run_insight&lt;/span&gt;(payload: InsightRunRequest):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Run full pipeline for one ticker&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Auto-fetches prices if not provided&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Stores results in insights_current table&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;2. Portfolio-Wide Refresh&lt;/strong&gt; - Batch processing for all holdings&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;@app.post&lt;/span&gt;(&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;/api/insights/refresh&amp;#34;&lt;/span&gt;) 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;async&lt;/span&gt; &lt;span style=&#34;color:#ff7b72&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;api_refresh_insights&lt;/span&gt;(payload: InsightRefreshRequest):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Process all holdings where track_insights = TRUE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Timeout protection per ticker (30s price, 60s AI)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Single-try logic - fail fast on problematic tickers&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;3. Retrieve Insights&lt;/strong&gt; - Frontend consumption&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;@app.get&lt;/span&gt;(&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;/api/insights&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;async&lt;/span&gt; &lt;span style=&#34;color:#ff7b72&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;api_get_insights&lt;/span&gt;(user_id: str):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Return all cached insights with move percentages&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Include full analysis JSON for debugging&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The database schema is deliberately simple:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;CREATE&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;TABLE&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;insights_current&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;(&lt;span style=&#34;color:#6e7681&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;    &lt;/span&gt;user_id&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;TEXT,&lt;span style=&#34;color:#6e7681&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;    &lt;/span&gt;symbol&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;TEXT,&lt;span style=&#34;color:#6e7681&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;    &lt;/span&gt;summary&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;TEXT,&lt;span style=&#34;color:#6e7681&#34;&gt;           &lt;/span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;-- The short, punchy insight
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;    &lt;/span&gt;move_text&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;TEXT,&lt;span style=&#34;color:#6e7681&#34;&gt;         &lt;/span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;-- Formatted percentage
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;    &lt;/span&gt;sentiment&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;TEXT,&lt;span style=&#34;color:#6e7681&#34;&gt;         &lt;/span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;-- Confidence level
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;    &lt;/span&gt;analysis_json&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;TEXT,&lt;span style=&#34;color:#6e7681&#34;&gt;     &lt;/span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;-- Full agent response for debugging
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;    &lt;/span&gt;captured_at&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;TIMESTAMP&lt;/span&gt;,&lt;span style=&#34;color:#6e7681&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;PRIMARY&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;KEY&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;(user_id,&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;symbol)&lt;span style=&#34;color:#6e7681&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;&lt;/span&gt;);&lt;span style=&#34;color:#6e7681&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;-- Toggle insight tracking per holding
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;ALTER&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;TABLE&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;holdings&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;ADD&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;COLUMN&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;track_insights&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;BOOLEAN&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;DEFAULT&lt;/span&gt;&lt;span style=&#34;color:#6e7681&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;TRUE&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;One row per ticker, overwritten on each refresh. No historical insight storage because honestly, who cares what the AI thought about AAPL three weeks ago?&lt;/p&gt;
+&lt;h2&gt;Frontend: Making It Actually Usable&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;frontend-making-it-actually-usable&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#frontend-making-it-actually-usable&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The insights panel went through several iterations before landing on something that didn&amp;rsquo;t look like a terminal dump. I also just found &lt;a href=&#34;https://stitch.google/&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Stitch&lt;/a&gt;, which is what I should have used in the first place but better late than never.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Design decisions:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Scrollable timeline for multiple insights&lt;/li&gt;
+&lt;li&gt;Green up arrows / red down arrows for instant visual parsing&lt;/li&gt;
+&lt;li&gt;Percentage formatting that doesn&amp;rsquo;t require squinting&lt;/li&gt;
+&lt;li&gt;Source attribution when available&lt;/li&gt;
+&lt;li&gt;Matched panel height with the holdings table (1300px) for visual balance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Grid layout adjustment:&lt;/strong&gt; Changed from 50/50 to 2.2fr/0.6fr split to give the holdings table breathing room while keeping insights visible. Tightened text spacing by ~15% because information density matters when you&amp;rsquo;re scanning 20 stocks.&lt;/p&gt;
+&lt;p&gt;The result: I can glance at my dashboard and immediately know which stocks moved and why, without clicking into anything.&lt;/p&gt;
+&lt;h2&gt;The Debugging Saga (Or: Why Local AI Is Hard)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;the-debugging-saga-or-why-local-ai-is-hard&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-debugging-saga-or-why-local-ai-is-hard&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now the fun part: Getting this working took more trial and error than I&amp;rsquo;d like to admit. Some highlights:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Model compatibility chaos:&lt;/strong&gt;
+Not all Ollama models handle structured JSON output reliably. Tested Gemma, Llama, Mistral, and various quantizations before finding ones that consistently returned parseable responses.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Temperature tuning:&lt;/strong&gt;
+Higher temperatures (0.7+) gave creative but inconsistent outputs. Dropped to 0.1-0.3 for reliable structured responses. The model doesn&amp;rsquo;t need to be creative about stock price analysis.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The copy-paste problem:&lt;/strong&gt;
+Early prompts included example outputs. The model would sometimes just copy the examples verbatim. &amp;ldquo;AAPL UP 2.3%: Strong iPhone sales&amp;hellip;&amp;rdquo; for every single ticker. Had to remove all hardcoded examples and rely purely on instructions. But I should find a way to add a few one-shot examples and still get this to work reliably.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Timeout handling:&lt;/strong&gt;
+Some tickers cause the model to hang indefinitely. Implemented &lt;code&gt;signal.alarm&lt;/code&gt; timeouts at two levels:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;30 seconds for price fetching (yfinance can be slow)&lt;/li&gt;
+&lt;li&gt;60 seconds for AI processing (some analyses just take forever)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    signal&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;.&lt;/span&gt;alarm(&lt;span style=&#34;color:#a5d6ff&#34;&gt;30&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    quote &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; get_stock_price_info(ticker)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    signal&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;.&lt;/span&gt;alarm(&lt;span style=&#34;color:#a5d6ff&#34;&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    signal&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;.&lt;/span&gt;alarm(&lt;span style=&#34;color:#a5d6ff&#34;&gt;60&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    result &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; run_insights_pipeline(&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;...&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    signal&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;.&lt;/span&gt;alarm(&lt;span style=&#34;color:#a5d6ff&#34;&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#f0883e;font-weight:bold&#34;&gt;TimeoutError&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(&lt;span style=&#34;color:#79c0ff&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;Timeout processing &lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;{&lt;/span&gt;symbol&lt;span style=&#34;color:#a5d6ff&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff7b72&#34;&gt;continue&lt;/span&gt;  &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Skip this ticker, move on&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Ollama server fallback:&lt;/strong&gt;
+If Ollama goes down mid-refresh, the system now detects it and skips remaining tickers rather than failing 20 times in a row. Small thing, but saves a lot of error log spam.&lt;/p&gt;
+&lt;h2&gt;What&amp;rsquo;s Actually Working&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;whats-actually-working&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#whats-actually-working&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;The good stuff:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Zero marginal cost:&lt;/strong&gt; Each analysis costs exactly $0.00&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sub-30-second insights:&lt;/strong&gt; Most tickers process in 10-20 seconds. And because its server-side, it doesn&amp;rsquo;t block the UI. Plus because I only refresh it once a day currently, I can live with the lag.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reasonable accuracy:&lt;/strong&gt; The catalysts identified &lt;em&gt;usually&lt;/em&gt; match what I find manually&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Graceful degradation:&lt;/strong&gt; Delisted tickers, network issues, model failures all handled without crashing&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Daily automation:&lt;/strong&gt; Scheduler runs insights refresh at market close&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Real examples from my portfolio:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;🟢 NVDA UP 3.2%: AI chip demand surge exceeds Q4 guidance; 
+   data center orders up 45% via earnings call.
+
+🔴 JPM DOWN 1.8%: Regulatory capital requirements increase; 
+   loan loss provisions rise via WSJ.
+
+🟢 UNH UP 2.1%: Medicare Advantage enrollment beats estimates; 
+   premium growth accelerates via SEC filing.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Are these always right? No. But they&amp;rsquo;re right often enough to be useful, and wrong in ways that are usually obvious (&amp;ldquo;TSLA UP 5%: Positive sentiment on social media&amp;rdquo; is not exactly deep analysis).&lt;/p&gt;
+&lt;h2&gt;Lessons&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;lessons&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#lessons&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;What still doesn&amp;rsquo;t work great:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Model hallucinations:&lt;/strong&gt; Occasionally the research agent will cite a source that doesn&amp;rsquo;t exist or misattribute a quote. The summarizer usually catches obvious errors, but not always. Trust but verify. Plus I will be doing some work to help harden the prompt.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Slow first run:&lt;/strong&gt; Cold-starting Ollama models takes 10-15 seconds. Subsequent runs are fast, but the first insight of the day does feel sluggish.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Web search quality:&lt;/strong&gt; The free web search tools (DuckDuckGo) aren&amp;rsquo;t always the best at finding recent, relevant financial news. Sometimes the agent falls back on general sentiment analysis when it can&amp;rsquo;t find specific catalysts. But so far its been negligible.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Confidence calibration:&lt;/strong&gt; The model says &amp;ldquo;high confidence&amp;rdquo; a lot. It doesn&amp;rsquo;t actually mean high confidence. Prompt engineering is a work in progress.&lt;/p&gt;
+&lt;h2&gt;The Cost Comparison&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;the-cost-comparison&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-cost-comparison&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Let&amp;rsquo;s be honest about what this saves:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Approach&lt;/th&gt;
+          &lt;th&gt;Cost per Refresh&lt;/th&gt;
+          &lt;th&gt;Monthly (Daily)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;OpenAI GPT-4&lt;/td&gt;
+          &lt;td&gt;~$7.20&lt;/td&gt;
+          &lt;td&gt;~$216&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Claude API&lt;/td&gt;
+          &lt;td&gt;~$5.40&lt;/td&gt;
+          &lt;td&gt;~$162&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Local Ollama&lt;/td&gt;
+          &lt;td&gt;$0.00&lt;/td&gt;
+          &lt;td&gt;$0.00&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The tradeoff is quality. GPT-4 would probably give better, more nuanced analysis. But for &amp;ldquo;tell me why AAPL moved 2% this morning,&amp;rdquo; the local models are good enough. And &amp;ldquo;good enough for free&amp;rdquo; beats &amp;ldquo;perfect for $200/month&amp;rdquo; in my personal philosophy.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;So what works?&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;so-what-works&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#so-what-works&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;AI on free infrastructure:&lt;/strong&gt; Custom agent orchestration with zero API costs&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fault-tolerant batch processing:&lt;/strong&gt; Timeout protection, graceful degradation, single-try logic&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API design:&lt;/strong&gt; Three endpoints that do exactly what they say&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reasonable UX:&lt;/strong&gt; Dashboard integration that doesn&amp;rsquo;t require a PhD to interpret&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Next Steps&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;next-steps&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#next-steps&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Actually deploy this thing:&lt;/strong&gt; Still running off my laptop like a caveman. The previous blog post promised deployment &amp;ldquo;somewhere free&amp;rdquo; and that IOU is still outstanding. Looking at Vercel, Render, or Railway&amp;rsquo;s free tiers to get this running in the cloud properly.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Automate the schedule in the cloud:&lt;/strong&gt; Right now, price capture and insights generation only run when my laptop is on. Need to move these scheduled jobs to a cloud cron service so they run reliably at market close, even when my laptop is not on.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Unit and integration testing:&lt;/strong&gt; Currently the testing strategy is &amp;ldquo;run it and see if it breaks.&amp;rdquo; Not ideal. Need proper test coverage for the agent pipeline, API endpoints, and the scheduler.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Better prompting:&lt;/strong&gt; Both agents could use more refined prompts. The research agent needs better guardrails for source verification, and the summarizer could use few-shot examples that don&amp;rsquo;t cause copy-paste behavior. Prompt engineering is an art I&amp;rsquo;m still learning.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reduce Ollama&amp;rsquo;s appetite:&lt;/strong&gt; My laptop fans sound like a jet engine during insights refresh. Exploring alternatives like smaller quantized models, offloading to a dedicated machine, or checking out Ollama Cloud (now in preview) to spare my MacBook&amp;rsquo;s sanity.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Alert thresholds:&lt;/strong&gt; Only generate insights when moves exceed a certain percentage. No need to analyze why MSFT moved 0.3%.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Final Thoughts&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;final-thoughts&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#final-thoughts&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Building this system taught me that the gap between &amp;ldquo;AI demo&amp;rdquo; and &amp;ldquo;AI that&amp;rsquo;s actually useful&amp;rdquo; is wider than the marketing suggests. Commercial AI SDKs are genuinely well-designed, but the economics of API costs make them impractical for personal projects. Rolling your own orchestration with local models is more work upfront, but the freedom is worth it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Would I recommend this approach?&lt;/strong&gt; If you&amp;rsquo;re okay with occasional hallucinations and have a machine that can run Ollama, absolutely. The zero-cost operation is genuinely freeing. I can refresh insights as often as I want without watching a usage meter climb.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The honest assessment:&lt;/strong&gt; This is a &amp;ldquo;good enough&amp;rdquo; solution, not a &amp;ldquo;perfect&amp;rdquo; solution. The insights are usually helpful, occasionally wrong, and always entertaining when the model confidently explains stock movements using news from three months ago.&lt;/p&gt;
+&lt;p&gt;But hey, it&amp;rsquo;s better than my previous system of Googling &amp;ldquo;why is [TICKER] down&amp;rdquo; and clicking through five ad-filled articles to find a one-sentence explanation.&lt;/p&gt;
+&lt;p&gt;Progress. And if not, well, I had fun building it. That&amp;rsquo;s gotta count for something. Plus unless you over-engineer a solution, how are you an engineer?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/jugaad/blog/ai-stock-insights-agent/over-engineer.png&#34; alt=&#34;Over-engineering in motion&#34;  loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;The Case for Open Source&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;the-case-for-open-source&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-case-for-open-source&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This project reinforced something I&amp;rsquo;ve been thinking about for a while: &lt;strong&gt;open source AI isn&amp;rsquo;t just a cost-saving measure it&amp;rsquo;s essential for the future of accessible technology.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s the thing. When OpenAI, Anthropic, or Google release their latest models, they&amp;rsquo;re genuinely impressive. But they come with strings attached: API costs, rate limits, terms of service that can change overnight, and the uncomfortable reality that your data flows through someone else&amp;rsquo;s servers. For a personal finance app, that last point matters at least to me.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Why open source models matter:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Privacy by default:&lt;/strong&gt; My portfolio data never leaves my laptop. No API calls to external servers means no data exfiltration risk, no privacy policies to read, no trust assumptions about how my financial information gets handled.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cost democratization:&lt;/strong&gt; The $216/month I&amp;rsquo;d spend on OpenAI could buy a decent GPU (&lt;em&gt;in a sane market&lt;/em&gt;) that runs local models indefinitely. Open source flips the economics from &amp;ldquo;pay per use&amp;rdquo; to &amp;ldquo;pay once, use forever.&amp;rdquo;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Experimentation freedom:&lt;/strong&gt; I can test 10 different models, tweak prompts endlessly, and run thousands of analyses without watching a billing meter. This kind of unrestricted experimentation is how you actually learn what works.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Community-driven improvement:&lt;/strong&gt; Every time someone figures out how to make Llama or Gemma work better for a specific use case, that knowledge benefits everyone. The rising tide lifts all boats.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;The bigger picture:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Projects like this are scrappy, imperfect, and running on consumer hardware are essential for the open source AI ecosystem. Every developer who figures out how to make local models work for their use case contributes to a collective knowledge base. Every blog post, GitHub repo, and Stack Overflow answer makes it easier for the next person.&lt;/p&gt;
+&lt;p&gt;The commercial AI providers will always have better models (at least for now). But open source has something they can&amp;rsquo;t match: &lt;strong&gt;accessibility without gatekeepers.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And to me, that&amp;rsquo;s worth the occasional hallucination.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Attribution&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;attribution&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#attribution&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This insights agent implementation is inspired by the excellent work at &lt;a href=&#34;https://github.com/IAmTomShaw/stock-tracker-agent&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;stock-tracker-agent&lt;/a&gt;, demonstrating how to build sophisticated financial AI systems using open-source components. If you&amp;rsquo;re looking to build something similar, that repo is a great starting point.&lt;/p&gt;
+&lt;p&gt;And to the open source community: the Ollama maintainers, the model quantizers, the documentation writers, the people answering questions on Discord at 2 AM thank you. This project and many others exist because of your work.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Building Another Financial App (Because the World Needs More of Those)</title>
+      <link>http://localhost:1313/jugaad/blog/another-financial-app/</link>
+      <pubDate>Fri, 21 Nov 2025 13:36:00 -0500</pubDate>
+      
+      <guid>http://localhost:1313/jugaad/blog/another-financial-app/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Look, I know what you&amp;rsquo;re thinking. &amp;ldquo;Another portfolio tracker? Really?&amp;rdquo; Yes, really. But this was less about building an application and more about studying the hypothesis that AI coding tools can replace the need for a human engineer.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Honest take:&lt;/strong&gt; AI coding tools are incredible for iteration speed and getting started as a complete novice. I built a full-stack app with a database, API, and modern frontend in two weekends, something that would&amp;rsquo;ve taken me months to learn and build from scratch. But you still need to understand what you&amp;rsquo;re building. I caught several bugs that would have shipped if I wasn&amp;rsquo;t reviewing the code, and the agents struggled badly when left to reconcile changes between frontend and backend without explicit direction.&lt;/p&gt;
+&lt;p&gt;At one point, when trying to reconcile changes between my git commit states, it confidently deleted my database, reseeded it with old data and then tried to gaslight me into thinking that it was the right thing to do for the application and the user experience. And then went into a doom loop of writing the same text over and over again.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/jugaad/blog/another-financial-app/llm-issues.png&#34; alt=&#34;LLM Debugging Session&#34;  loading=&#34;lazy&#34; /&gt;
+&lt;em&gt;Windsurf losing its mind when asked to reconcile changes between my git commit states.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The agents excel at boilerplate and wireframing but aren&amp;rsquo;t ready for production-grade maintainable code. They confidently suggest changes that break things, confuse business logic, and need constant hand-holding for anything beyond the happy path. With minor guidance though, they&amp;rsquo;re incredibly productive. Left to their own devices, they generate slop.&lt;/p&gt;
+&lt;p&gt;The real skill isn&amp;rsquo;t prompt engineering it&amp;rsquo;s knowing what context to provide, when to let the AI run, when to step in yourself, and when to just write the damn code because explaining it takes longer. AI is a powerful assistant for learning and prototyping, not a replacement for thinking or understanding your stack.&lt;/p&gt;
+&lt;p&gt;In order to appear unbiased I changed between 3 agents GPT-Codex 5.1, Windsurf SWE 1.5 &amp;amp; Claude Sonnet 4.5. I did not use Claude Code as it was not available in the open source version of Claude.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The Idea: Why?&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;the-idea-why&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-idea-why&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;My Google Sheets portfolio tracker has become a monster. VLOOKUP formulas, manual price updates, and calculations that are hard to track every time I added a new holding or update any of the current ones. I needed something better, which to be fair could be built in Google sheets, but how will be called an engineer if I dont spend 2 weekends over-complicating my life. Added to that I also had some real life constraints:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Zero infrastructure cost.&lt;/strong&gt; I&amp;rsquo;m not paying for cloud hosting to track my own money. This thing runs locally or on free tiers, period.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;No bank integrations.&lt;/strong&gt; I don&amp;rsquo;t trust giving API access to my actual accounts and dont trust myself with any security or auth endpoints, and honestly, I don&amp;rsquo;t need it. Manual data entry keeps me aware of what I&amp;rsquo;m doing.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Learning first, product second.&lt;/strong&gt; The real goal though was hands-on experience with Python backends and modern frontend development. Plus to see if LLMs have become good enough to plan, build and manage a full stack application. Short answer: &lt;em&gt;Its complicated&lt;/em&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Planning: Architecture, Wireframes, and AI Guardrails&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;planning-architecture-wireframes-and-ai-guardrails&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#planning-architecture-wireframes-and-ai-guardrails&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;I started with a spec that was way too ambitious. Multi-user support, real-time market data, account linking, tax optimization—basically everything. Then reality hit, what I needed was to first finish the replication of a google sheet along with a bunch of visuals which track the data on a temporal basis.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The actual plan:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Backend:&lt;/strong&gt; FastAPI + SQLite. Simple, fast, no infrastructure needed.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Frontend:&lt;/strong&gt; Alpine.js + HTML which then evolved to Tailwind. I wanted to learn some CSS frameworks.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data:&lt;/strong&gt; Yahoo Finance via &lt;code&gt;yfinance&lt;/code&gt; for free market data.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scheduling:&lt;/strong&gt; APScheduler to capture prices on weekdays.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Database schema&lt;/strong&gt; evolved as I built:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;user_info&lt;/code&gt; for multi-user switching (because why not)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;holdings&lt;/code&gt; with versioning, soft deletes, and way too many unnecessary fields&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;price_history&lt;/code&gt; + &lt;code&gt;price_history_hourly&lt;/code&gt; for historical data; cost effective to delete hourly data if table gets too big&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;portfolio_snapshots&lt;/code&gt; for aggregate metrics over time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;AI guardrails&lt;/strong&gt; became crucial. I set up:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Context files&lt;/strong&gt; explaining the schema and calculation logic&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Memory rules&lt;/strong&gt; to prevent the AI from breaking existing patterns&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Explicit instructions&lt;/strong&gt; about contribution vs. gain calculations (this became important later)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The wireframe was simple: dashboard with cards, holdings table, and a visualizations tab. Nothing fancy, but functional.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/jugaad/blog/another-financial-app/html-wireframe.png&#34; alt=&#34;Early HTML Wireframe&#34;  loading=&#34;lazy&#34; /&gt;
+&lt;em&gt;The Alpine.js prototype—fully functional with no build step.&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;UX: Down the Tailwind Rabbit Hole&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;ux-down-the-tailwind-rabbit-hole&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#ux-down-the-tailwind-rabbit-hole&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Then came the itch to make it look better. I spent way too much time researching Tailwind themes and component libraries. Shadcn/ui, DaisyUI, Flowbite—I tried them all. Eventually landed on a custom setup with soft shadows, pill badges, and consistent card styling.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Design decisions:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Soft card shadows instead of hard borders (looks more modern)&lt;/li&gt;
+&lt;li&gt;Pill badges for account types and categories&lt;/li&gt;
+&lt;li&gt;Sparklines for account growth trends&lt;/li&gt;
+&lt;li&gt;Responsive layout that doesn&amp;rsquo;t break on mobile&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The movement card took forever to get right. Should it show daily change? Change since last contribution? Change vs. total contribution? I went through three iterations before settling on contribution-based movement because that&amp;rsquo;s what actually makes sense for my portfolio.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Color scheme:&lt;/strong&gt; Kept it simple. Green for gains, red for losses, neutral grays for everything else. No need to reinvent the wheel here.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Coding: Backend Discipline, Frontend Chaos&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;coding-backend-discipline-frontend-chaos&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#coding-backend-discipline-frontend-chaos&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Backend:&lt;/strong&gt; I actually wrote this properly with code generation helpers, of course. FastAPI endpoints with relatively clear separation of concerns (there may be duplicate endpoints in there), proper-ish error handling, and relatively consistent response formats. Six core endpoints drive the entire application:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. GET &lt;code&gt;/api/holdings&lt;/code&gt;&lt;/strong&gt; – The workhorse. Accepts optional &lt;code&gt;user_id&lt;/code&gt; (defaults to &lt;code&gt;default&lt;/code&gt;), loads that user&amp;rsquo;s latest holdings from SQLite, enriches each row with calculated value/gain fields, and returns both the holdings array and aggregate stats (&lt;code&gt;total_value&lt;/code&gt;, &lt;code&gt;total_cost&lt;/code&gt;, &lt;code&gt;total_gain&lt;/code&gt;, etc.). This is what the frontend calls whenever you switch users or refresh the portfolio table.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;@app.get&lt;/span&gt;(&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;/api/holdings&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;async&lt;/span&gt; &lt;span style=&#34;color:#ff7b72&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;get_holdings&lt;/span&gt;(user_id: str &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;default&amp;#34;&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Fetch holdings, enrich with prices, calculate stats&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Return consistent JSON structure with holdings + aggregates&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;2. POST &lt;code&gt;/api/holdings&lt;/code&gt;&lt;/strong&gt; – Creates new holdings. Expects a Pydantic schema with account details, ticker/lookup, position sizing, contribution settings, and price tracking flags. Returns the new record ID so the UI can refresh immediately.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. GET &lt;code&gt;/api/portfolio-movement&lt;/code&gt;&lt;/strong&gt; – Powers the &amp;ldquo;net change&amp;rdquo; widget. Accepts &lt;code&gt;range&lt;/code&gt; (7d/1m/3m/ytd/all) plus optional &lt;code&gt;user_id&lt;/code&gt;. Fetches snapshots from &lt;code&gt;portfolio_snapshots&lt;/code&gt;, appends the current point, and computes change vs. total contributions (not earliest snapshot—this was the key fix). Response includes &lt;code&gt;current_value&lt;/code&gt;, &lt;code&gt;change&lt;/code&gt;, &lt;code&gt;change_percent&lt;/code&gt;, and time-series points.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;@app.get&lt;/span&gt;(&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;/api/portfolio-movement&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;async&lt;/span&gt; &lt;span style=&#34;color:#ff7b72&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;get_portfolio_movement&lt;/span&gt;(range: str &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;7d&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; user_id: str &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;default&amp;#34;&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Fetch snapshots, append current point, compute change&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Return consistent JSON structure with current_value, change,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# change_percent, and time-series points&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;4. GET &lt;code&gt;/api/portfolio-history&lt;/code&gt;&lt;/strong&gt; – Feeds the history chart. Supports &lt;code&gt;days&lt;/code&gt;, &lt;code&gt;hours&lt;/code&gt;, &lt;code&gt;granularity&lt;/code&gt; (&lt;code&gt;day&lt;/code&gt; or &lt;code&gt;hour&lt;/code&gt;), and &lt;code&gt;user_id&lt;/code&gt;. Builds portfolio value series and per-account-type series for both the main line chart and account-type sparklines.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;@app.get&lt;/span&gt;(&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;/api/portfolio-history&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff7b72&#34;&gt;async&lt;/span&gt; &lt;span style=&#34;color:#ff7b72&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#d2a8ff;font-weight:bold&#34;&gt;get_portfolio_history&lt;/span&gt;(days: int &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;7&lt;/span&gt;, hours: int &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;24&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;granularity: str &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;day&amp;#34;&lt;/span&gt;, user_id: str &lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#34;default&amp;#34;&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Build portfolio value series and per-account-type series&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# Return consistent JSON structure with portfolio value series &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8b949e;font-style:italic&#34;&gt;# and per-account-type series&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;5. GET &lt;code&gt;/api/price-history/{ticker}&lt;/code&gt;&lt;/strong&gt; – Single-holding drill-down. Returns daily close history for the ticker over the requested &lt;code&gt;days&lt;/code&gt; window, pulling from the &lt;code&gt;price_history&lt;/code&gt; table (kept current by capture jobs).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;6. POST &lt;code&gt;/api/capture-prices&lt;/code&gt;&lt;/strong&gt; – Manual trigger for the scheduler. Loops through all holdings, fetches current quotes via yfinance, inserts both daily and hourly price history rows, and saves a portfolio snapshot. Useful for forcing fresh data during demos without waiting for the cron job.&lt;/p&gt;
+&lt;p&gt;The separation between data fetching, enrichment, and aggregation made debugging easier. When stats didn&amp;rsquo;t match between backend and UI, I could trace exactly where the calculation diverged.&lt;/p&gt;
+&lt;p&gt;The code agent though didnt have such an easy time debugging. It wasnt able to trace the calculation divergence and wasnt able to identify the root cause of the issue unless I gave it explicit directions on which endpoints to use and what data to expect. Plus the ability to confirm the data being printed on the front end was also not very easy which led to multiple debugging sessions to align the data being sent from the backend and the data being received on the frontend.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Frontend: Three Iterations, Three Lessons&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I didn&amp;rsquo;t start with React. I took an iterative approach that taught me more than jumping straight to a framework would have.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 1: Static Landing (FastAPI Templates)&lt;/strong&gt;
+First version was just a Tailwind-styled landing page served by FastAPI. Listed the API endpoints, linked to Swagger docs, proved the stack worked. No live data, no interactivity—just &amp;ldquo;hello world&amp;rdquo; with better CSS.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 2: Alpine.js Prototype&lt;/strong&gt;
+This is where it got interesting. I was able to build a fully functional prototype using Alpine.js and Chart.js—no build step, no npm dependencies, just CDN links and vanilla JavaScript. The prototype had everything:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Live API calls fetching holdings and portfolio data&lt;/li&gt;
+&lt;li&gt;Filter/search controls for the holdings table&lt;/li&gt;
+&lt;li&gt;Add/edit/delete modals for CRUD operations&lt;/li&gt;
+&lt;li&gt;Visualization tabs with account breakdowns and sparklines&lt;/li&gt;
+&lt;li&gt;All client-side state management with Alpine&amp;rsquo;s reactive data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Why Alpine first? I wanted to validate the UX without committing to React&amp;rsquo;s complexity. Could I build something useful with just HTML and a sprinkle of JavaScript? Turns out, yes. The prototype worked great and let me iterate on design quickly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 3: React Migration&lt;/strong&gt;
+Once the prototype proved the UX, I migrated to React. Not because Alpine couldn&amp;rsquo;t handle it, but because the component-based architecture made more sense for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reusable components (&lt;code&gt;StatsCard&lt;/code&gt;, &lt;code&gt;HoldingsTable&lt;/code&gt;, &lt;code&gt;VisualizationsPanel&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Proper routing between dashboard and visualizations tabs&lt;/li&gt;
+&lt;li&gt;Centralized API client (&lt;code&gt;src/api/client.ts&lt;/code&gt;) for consistency&lt;/li&gt;
+&lt;li&gt;User switching with state management&lt;/li&gt;
+&lt;li&gt;Better async loading states and error handling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The migration though was not straightforward because at this point we were fully committed to the vibe code train and being a front end novice I had to rely on the agent to generate and validate code for me. I was honestly helpless at times because of my inexperience with JavaScript and had to let the agent self critique to fix the code. This took a lot more attempts than I thought it would and is an area where agents need to improve. In my experience agents did a good job even when I could provide minor hand holding, but left to their own volition they would run amok and generate a lot more slop than needed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What I vibecoded:&lt;/strong&gt; The entire React app. I described components to the code agents - &amp;ldquo;build a holdings table with filters, sortable columns, and inline edit&amp;rdquo;—and it generated working code. Then I iterated on styling, added the contribution-based movement calculations, and wired up user switching. Though the agent did a good job on boilerplating and building out the wireframe, its still not ready to generate production grade maintainable code.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Key insight:&lt;/strong&gt; Starting simple (static HTML) → validating UX (Alpine prototype) → scaling complexity (React) taught me more than building React first would have. Each phase had a clear purpose, and I only added complexity when I needed it. This also allows the agents to work through the code train and explain to itself what it needs to do.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The CLI utilities&lt;/strong&gt; saved me. &lt;code&gt;db_cli.py&lt;/code&gt; handles seeding dummy data, backfilling prices, and manual price captures. When the scheduler fails (which it does), I can run commands manually.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Scheduler setup:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;scheduler&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;.&lt;/span&gt;add_job(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    capture_prices,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    trigger&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt;CronTrigger(day_of_week&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#39;mon-fri&amp;#39;&lt;/span&gt;, hour&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;16&lt;/span&gt;, minute&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;30&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id&lt;span style=&#34;color:#ff7b72;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a5d6ff&#34;&gt;&amp;#39;price_capture&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;This captures prices at 4:30 PM on weekdays. Simple, effective, and doesn&amp;rsquo;t hammer Yahoo Finance.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;What Actually Got Built?&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;what-actually-got-built&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#what-actually-got-built&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;A fully functional portfolio tracker&lt;/strong&gt; with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Dashboard overview:&lt;/strong&gt; Total value, contribution, gain/loss, return %, market indexes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Holdings management:&lt;/strong&gt; Add, edit, delete holdings with proper forms and validation&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Account breakdown:&lt;/strong&gt; Cards showing TFSA, RRSP, Non-Registered allocations&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Visualizations:&lt;/strong&gt; Account-type bar chart and 60-day portfolio line chart&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User switching:&lt;/strong&gt; Toggle between default and &lt;code&gt;user_alex&lt;/code&gt; profiles&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Price capture:&lt;/strong&gt; Automated weekday job + manual CLI commands&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dummy data:&lt;/strong&gt; Seed script creates realistic 18-holding portfolio with 30 days of history&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Current state:&lt;/strong&gt; Dashboard shows ~$173k portfolio value, ~$160k contribution, ~$13k total gain. Holdings include AAPL, MSFT, NVDA, TSLA across different account types. The UI is clean, responsive, and actually useful.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/jugaad/blog/another-financial-app/dashboard-overview.png&#34; alt=&#34;Dashboard Overview&#34;  loading=&#34;lazy&#34; /&gt;
+&lt;em&gt;Dashboard with portfolio stats, market indexes, and account breakdown.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/jugaad/blog/another-financial-app/holdings-table.png&#34; alt=&#34;Holdings Table&#34;  loading=&#34;lazy&#34; /&gt;
+&lt;em&gt;Holdings table with filters, search, and inline editing.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What&amp;rsquo;s missing:&lt;/strong&gt; Historical price backfill gets blocked by Yahoo Finance rate limits. A deployment plan is still needed to get the app live. I have zero-ed in on Supabase + Netlify for the deployment strategy but its still work to be done. As I mentioned earlier, the idea is to keep this at 0 cost.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Model Performance: GPT-5.1, Windsurf &amp;amp; Claude in the Arena&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;model-performance-gpt-51-windsurf--claude-in-the-arena&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#model-performance-gpt-51-windsurf--claude-in-the-arena&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;GPT-5.1 Codex (via Windsurf Cascade):&lt;/strong&gt; Great for planning and architecture discussions. Helped design the database schema and API structure. Sometimes over-engineers solutions, but good at catching edge cases.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude (Sonnet 3.5):&lt;/strong&gt; The workhorse for actual coding. Vibecoding the frontend was surprisingly effective. Describe the component, get working React code, iterate on styling. It understood Tailwind patterns and generated clean, consistent code.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Windsurf - SWE 1.5:&lt;/strong&gt; Fast, iterative, and effective. It was able to generate code quickly and efficiently. It was also able to self critique and fix code for when it thought it was wrong.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Where they struggled:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Math consistency:&lt;/strong&gt; The contribution vs. gain calculations took multiple iterations to get right. The AI kept confusing cost basis with current value.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Front-end vs Back-end:&lt;/strong&gt; It was hard for the AI to reconcile changes between the front-end and back-end. It would suggest changes that would break either the front-end or back-end. And without explicit instructions would confidently suggest changes that would break one or the other. Here is the LLM losing its mind when asked to reconcile mathematics between the front-end and back-end.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;State management:&lt;/strong&gt; React state updates in modals required explicit instructions about when to refetch data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Rate limiting:&lt;/strong&gt; Neither model suggested throttling for the Yahoo Finance backfill until I explicitly asked about the 429 errors.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Where they excelled:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Boilerplate generation:&lt;/strong&gt; FastAPI routes, React components, SQL queries—all generated quickly and correctly.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Styling iterations:&lt;/strong&gt; &amp;ldquo;Make the cards softer,&amp;rdquo; &amp;ldquo;Add sparklines to account cards,&amp;rdquo; &amp;ldquo;Use pill badges for categories&amp;rdquo;—it just worked.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Getting started:&lt;/strong&gt; For a complete novice like me, I was still able to build a full stack application with a database, API, and stylistic front-end elements over the course of 2 weekends.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Best Practices for Vibecoding (What Actually Works)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;best-practices-for-vibecoding-what-actually-works&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#best-practices-for-vibecoding-what-actually-works&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Building this app taught me that effective AI coding isn&amp;rsquo;t about clever prompts—it&amp;rsquo;s about &lt;strong&gt;context engineering&lt;/strong&gt;. Here&amp;rsquo;s what made the difference:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Prime the Agent Before Tasks&lt;/strong&gt;
+Don&amp;rsquo;t let the AI jump straight into implementation. Make it read context first:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Read &lt;code&gt;database.py&lt;/code&gt;, &lt;code&gt;main.py&lt;/code&gt;, and the holdings schema. Summarize what you learned about how we track portfolio data.&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Force it to summarize. This puts the right mental model in context before it writes code.&lt;/li&gt;
+&lt;li&gt;For new libraries or APIs, explicitly point it to documentation. The AI can&amp;rsquo;t read your mind about what &lt;code&gt;yfinance&lt;/code&gt; returns.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;2. Context Files Are Your Friend&lt;/strong&gt;
+I created &lt;code&gt;CONTEXT.md&lt;/code&gt; files explaining:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Database schema and why fields exist (e.g., why &lt;code&gt;contribution&lt;/code&gt; vs &lt;code&gt;cost&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Calculation logic (contribution-based gains, not snapshot deltas)&lt;/li&gt;
+&lt;li&gt;API patterns (all endpoints accept &lt;code&gt;user_id&lt;/code&gt;, return consistent JSON)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These files saved me from re-explaining the same concepts in every conversation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. Use Memories and Rules&lt;/strong&gt;
+Windsurf&amp;rsquo;s memory system let me set persistent rules:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Always use contribution-based calculations for net change&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Never delete price_history rows, only soft-delete holdings&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;User switching must preserve state across all components&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The AI stopped making the same mistakes once I encoded these as memories.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. Spec First, Code Second&lt;/strong&gt;
+Vague prompts produce vague code. I learned to write mini-specs:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;Build a movement card that:
+- Accepts range (7d/1m/3m/ytd/all)
+- Compares current value vs total contribution (NOT earliest snapshot)
+- Shows absolute change, percent change, and sparkline
+- Updates when user switches or range changes&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;This took 2 minutes to type but saved hours of back-and-forth.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. &amp;ldquo;Ultrathink and Make a Plan&amp;rdquo;&lt;/strong&gt;
+For complex features, I&amp;rsquo;d say: &amp;ldquo;Ultrathink and make a plan. Don&amp;rsquo;t implement until I approve.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;The AI would outline the approach, I&amp;rsquo;d catch issues early, then implementation went smoothly. Skipping this step meant rewriting code later.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;6. Set Up Feedback Loops&lt;/strong&gt;
+The AI works best when it can test its own changes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Backend: It could run the server, hit endpoints with &lt;code&gt;curl&lt;/code&gt;, see errors&lt;/li&gt;
+&lt;li&gt;Frontend: It could check browser console logs, see React errors&lt;/li&gt;
+&lt;li&gt;Database: It could query SQLite directly to verify data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When feedback loops broke (e.g., Yahoo 429 errors), progress stalled until I manually intervened.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;7. Screenshots for UI Iteration&lt;/strong&gt;
+For the Alpine prototype, I&amp;rsquo;d paste screenshots and say &amp;ldquo;the spacing feels cramped&amp;rdquo; or &amp;ldquo;make the cards more modern.&amp;rdquo; The AI understood visual feedback better than I expected. This worked way better than describing CSS changes in text.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;8. Self-Critique Prompts&lt;/strong&gt;
+When something felt off, I&amp;rsquo;d ask: &amp;ldquo;Review this code. What could go wrong? What edge cases are we missing?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;The AI caught issues like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Not handling empty holdings arrays&lt;/li&gt;
+&lt;li&gt;Missing error states for failed API calls&lt;/li&gt;
+&lt;li&gt;Race conditions in async state updates&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;9. Know When to Take Over&lt;/strong&gt;
+AI is great at boilerplate, terrible at nuanced business logic. I wrote the contribution vs. gain calculations myself after the AI kept confusing them. I built the visualizations panel myself after it was unable to find the right library, font, spacing and color scheme for Charts.js. Some things are still faster to code than to explain, or maybe its user error and I need to get better at prompt engineering.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Wins&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;wins&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#wins&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;It actually works.&lt;/strong&gt; I can track my portfolio, see real-time prices, and understand my gains without fighting with Google Sheets formulas.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Clean architecture.&lt;/strong&gt; The backend is maintainable. The API is consistent. The database schema makes sense. Future me might thank current me.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Learning happened.&lt;/strong&gt; I now understand FastAPI routing better, have some semblance of understanding React state management, still cant figure out Tailwind styling though (how do people do it), and SQLite versioning way better than before.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Realistic dummy data.&lt;/strong&gt; The seed script creates a believable portfolio with proper math. Contributions, gains, and snapshots all align correctly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;User switching works.&lt;/strong&gt; Multi-user support wasn&amp;rsquo;t strictly necessary, but it was fun to build and actually useful for testing.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Losses and Challenges&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;losses-and-challenges&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#losses-and-challenges&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Yahoo Finance rate limits.&lt;/strong&gt; The backfill command hits 429 responses immediately. I need throttling or an alternative data source. For now, the portfolio chart shows one point instead of 60 days of history.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bugs.&lt;/strong&gt; So many front end and back end bugs. Aligning text with the visuals was a real pain. Getting the agent to understand which API route to use took a few tries before I could freeze the spec. Switching from HTML to React components was a real pain. Running the seed script multiple times created duplicate rows.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Movement card confusion.&lt;/strong&gt; The net change calculation used the earliest snapshot, which didn&amp;rsquo;t match user expectations. Switched to contribution-based movement, which makes way more sense.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tailwind &lt;code&gt;@apply&lt;/code&gt; warnings.&lt;/strong&gt; Still unresolved. The linter complains about &lt;code&gt;@apply&lt;/code&gt; directives in &lt;code&gt;index.css&lt;/code&gt;, but everything works fine. I&amp;rsquo;ll fix it eventually.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Over-engineering temptation.&lt;/strong&gt; I almost added account linking, and automated rebalancing. Stopped myself because this was supposed to be a learning project, not a startup.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;API costs anxiety.&lt;/strong&gt; Even with free Yahoo Finance, I&amp;rsquo;m paranoid about rate limits. Need to implement caching and throttling properly.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Final Thoughts&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;final-thoughts&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#final-thoughts&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Building this app taught me more than any tutorial could. The struggles with rate limits, the iterations on UI design, the debugging of calculation mismatches—all of it was valuable learning.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Would I recommend this approach?&lt;/strong&gt; Absolutely. Pick a problem you actually have, build a solution, and learn along the way. You&amp;rsquo;ll retain way more than passively watching courses. Here&amp;rsquo;s my best breakdown of where I spent my time:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/jugaad/blog/another-financial-app/gemini-chat-image.png&#34; alt=&#34;Agent Time Breakdown&#34;  loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Next steps:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Deployment (Next blog post):&lt;/strong&gt; Supabase for the database (free tier with 500MB) + Netlify for the frontend (free tier with 100GB bandwidth). Backend will need to be serverless functions or a lightweight container on Railway/Render&amp;rsquo;s free tier. The goal is still zero cost.&lt;/li&gt;
+&lt;li&gt;Fix the historical backfill (throttling or synthetic data)&lt;/li&gt;
+&lt;li&gt;Clean up Tailwind lint warnings&lt;/li&gt;
+&lt;li&gt;Add tests (Maybe?)&lt;/li&gt;
+&lt;li&gt;Implement proper caching and throttling for Yahoo Finance API calls&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;A Note on AI and the Barrier to Entry&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;a-note-on-ai-and-the-barrier-to-entry&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#a-note-on-ai-and-the-barrier-to-entry&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This project proved something important: &lt;strong&gt;AI coding tools have dramatically lowered the barrier to entry for building software.&lt;/strong&gt; As someone without deep frontend experience, I was able to build a full-stack application with a modern UI in two weekends. That&amp;rsquo;s genuinely remarkable and opens up software development to people who previously would&amp;rsquo;ve been stuck in tutorial hell for months.&lt;/p&gt;
+&lt;p&gt;But here&amp;rsquo;s the critical caveat: &lt;strong&gt;don&amp;rsquo;t trust AI for core business logic or critical functions yet.&lt;/strong&gt; A human is still a better judge of correctness, edge cases, and architectural decisions. The AI will confidently generate code that looks right but breaks in subtle ways. It will suggest &amp;ldquo;fixes&amp;rdquo; that introduce new bugs. It will delete your database and tell you it was the right call.&lt;/p&gt;
+&lt;p&gt;Use AI to accelerate learning, generate boilerplate, and iterate on UI. But for the calculations that matter, the security that protects users, and the logic that defines your application—write that yourself or review it extremely carefully. The barrier to entry is lower, but the responsibility to understand what you&amp;rsquo;re shipping hasn&amp;rsquo;t changed.&lt;/p&gt;
+&lt;p&gt;The best projects are the ones you actually use. This portfolio tracker replaced my Google Sheets mess, and I learned a ton building it. That&amp;rsquo;s a win in my book.&lt;/p&gt;
+&lt;p&gt;Now go build something that solves your own problem. You&amp;rsquo;ll learn more than you expect. Just don&amp;rsquo;t let the AI convince you to drop your production database.&lt;/p&gt;
+
+      </description>
+    </item>
     
     <item>
       <title>Python Environment Managers: pip &#43; venv vs poetry &#43; pyenv vs uv</title>

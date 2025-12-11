@@ -337,3 +337,136 @@ pre code {
   overflow-x: auto !important;
   white-space: pre !important;
 }
+
+/* Reduce left whitespace on blog pages - shift content left */
+@media (min-width: 1024px) {
+  /* Target the main content area and reduce left padding/margin */
+  .hx-mx-auto {
+    margin-left: 1rem !important;
+    margin-right: auto !important;
+  }
+  
+  /* Adjust the main container to use more horizontal space */
+  main.hx-w-full {
+    padding-left: 1rem !important;
+  }
+  
+  /* Blog article content - reduce left margin */
+  article.hx-w-full {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  /* Force the main article layout to align left instead of centered */
+  /* Target the flex container article using escaped selector for colon */
+  article.hx\:flex,
+  article.hx\:justify-center {
+    justify-content: flex-start !important;
+  }
+
+  /* Target the main content wrapper */
+  /* Correctly escape the colon in max-w-6xl */
+  article > main.hx\:max-w-6xl {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    padding-left: 1rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* For larger screens (XL) where TOC appears */
+@media (min-width: 1280px) {
+  /* Override the max-width container limitation */
+  .hextra-max-page-width, 
+  .hx\:max-w-screen-xl {
+    max-width: 100% !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+
+  /* 
+     Constrain the article width to prevent overlap with the fixed TOC.
+     The TOC sidebar is roughly 16rem (256px). 
+     We limit the article width so it doesn't slide under the TOC.
+  */
+  article.hx\:w-full {
+    width: auto !important;
+    max-width: calc(100vw - 350px) !important; /* 350px safety margin for TOC */
+    padding-right: 0 !important;
+  }
+
+  /* Ensure code blocks stay within the constrained article width */
+  article pre, 
+  .hextra-code-block pre {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    white-space: pre !important;
+  }
+  
+  /* Force code blocks to respect container boundaries */
+  .hextra-code-block {
+    max-width: 100% !important;
+    width: auto !important;
+  }
+}
+
+/* =========================================
+   Layout Overrides to Fix Alignment & Overlap
+   ========================================= */
+
+/* 1. Force the Page Container to full width and left alignment on desktop */
+@media (min-width: 1024px) {
+  /* Target the main container div that has hx:mx-auto */
+  .hextra-max-page-width,
+  div.hx\:mx-auto.hextra-max-page-width {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+  }
+}
+
+/* 2. Force Article content to align left instead of center */
+article.hx\:justify-center {
+  justify-content: flex-start !important;
+}
+
+/* 3. Allow Main content to expand and remove default constraints */
+article > main.hx\:max-w-6xl {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  padding-left: 2rem !important; /* Breathing room from left edge/sidebar */
+}
+
+/* 4. Fix Code Block Overlap and TOC spacing on large screens (XL) */
+@media (min-width: 1280px) {
+  /* 
+     The TOC is sticky on the right (approx 16rem/256px wide).
+     We add right padding to the article so content doesn't flow under it.
+  */
+  article.hx\:w-full {
+    padding-right: 20rem !important; 
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Force code blocks to respect the padded container width */
+  article pre,
+  .hextra-code-block,
+  .hextra-code-block pre {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: auto !important; /* Enable horizontal scroll */
+    white-space: pre !important;
+  }
+
+  /* Ensure images don't overflow */
+  article img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
