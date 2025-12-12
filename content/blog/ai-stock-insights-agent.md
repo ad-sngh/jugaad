@@ -220,7 +220,7 @@ One row per ticker, overwritten on each refresh. No historical insight storage b
 
 ## Frontend: Making It Actually Usable
 
-The insights panel went through several iterations before landing on something that didn't look like a terminal dump. I also just found [Google Stitch](https://stitch.google/), which is what I should have used in the first place but better late than never.
+The insights panel went through several iterations before landing on something that didn't look like a terminal dump. I also just found [Google Stitch](https://stitch.withgoogle.com/), which is what I should have used in the first place but better late than never.
 
 **Design decisions:**
 - Scrollable timeline for multiple insights
